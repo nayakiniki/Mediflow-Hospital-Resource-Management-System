@@ -2,7 +2,7 @@
 
 > A real-time, clinical-grade hospital command center and spatial operations platform designed for healthcare administrators, emergency physicians, operations managers, and nursing supervisors.
 
-MediFlow delivers continuous operational situational awareness, combining 3D spatial hospital capacity modeling, isometric bed allocation, automated patient priority triaging, staff coverage management, and predictive surge analytics. It is built as a part of Summer Practical Training Report.
+MediFlow delivers continuous operational situational awareness, combining 3D spatial hospital capacity modeling, isometric bed allocation, automated patient priority triaging, staff coverage management, and predictive surge analytics. It is built as a part of Summer Practical Training + Internship Project including Report.
 
 ---
 
