@@ -6,7 +6,7 @@ MediFlow delivers continuous operational situational awareness, combining 3D spa
 
 ---
 
-## 🏛️ Architectural Overview
+##  Architectural Overview
 
 MediFlow is built as a high-density, mission-critical operations system. The visual design adheres to a signature command-center aesthetic—deep obsidian and pine canvases (`#0B1710`, `#13251B`) paired with classical typography (Cinzel & Plus Jakarta Sans), high-contrast clinical indicators, and subtle directional motion.
 
@@ -21,9 +21,9 @@ MediFlow is built as a high-density, mission-critical operations system. The vis
 
 ---
 
-## ✨ Core Modules & Capabilities
+## Core Modules & Capabilities
 
-### 1. 🛏️ 3D Bed Map & Ward Availability (`BedMap3D`)
+### 1.  3D Bed Map & Ward Availability (`BedMap3D`)
 * **Isometric Spatial Visualization**: Interactive 3D layout rendering hospital beds with physical architectural dimensions, headrests, IV poles, status beacons, and bedside telemetry monitors.
 * **Discrete Availability Lifecycle States**:
   * `Available` (Controlled Emerald `#10B981`)
@@ -36,30 +36,30 @@ MediFlow is built as a high-density, mission-critical operations system. The vis
 * **Instant Bed Allocation**: Contextual "Allocate Patient to Bed" action directly assigning triaged patients to available beds.
 * **Accessible Fallback**: Integrated 2D layout grid when WebGL is unavailable or when toggled via scene controls.
 
-### 2. 🏥 3D Hospital Capacity Spatial Scene
+### 2.  3D Hospital Capacity Spatial Scene
 * **Major Department Models**: Spatial representation of the Intensive Care Unit (ICU), Emergency Medicine, General Ward, and Surgical Suites.
 * **Occupancy Thresholds**: Visual state transitions (Normal, Approaching Capacity, and Critical Capacity) based on real-time bed metrics.
 * **Interactive Hover Telemetry**: Parallax response with clinical information pills displaying occupancy percentages, available beds, active patients, and doctors on duty.
 
-### 3. 🌊 Dynamic Patient-Resource Flow
+### 3.  Dynamic Patient-Resource Flow
 * **Operational Flow Representation**: Animated particle flow mapping:
   $$\text{Arrival} \longrightarrow \text{Priority Assessment} \longrightarrow \text{Priority Queue} \longrightarrow \text{Bed Allocation} \longrightarrow \text{Doctor Assignment} \longrightarrow \text{Treatment} \longrightarrow \text{Discharge / Transfer}$$
 * Connected to real application state and active patient counts without fabricated telemetry.
 
-### 4. 📋 Critical Patient Queue & Clinical Timeline
+### 4.  Critical Patient Queue & Clinical Timeline
 * **Explainable Priority Scoring**: Transparent attribution breakdown (SHAP factor weights: severity, abnormal $SpO_2$, wait time, age multiplier, comorbidities).
 * **Clinical Timeline View**: Comprehensive stage tracking (Admission $\to$ Assessment $\to$ Bed Assignment $\to$ Treatment $\to$ Transfer $\to$ Discharge).
 * **Workflows & Handoffs**: Direct clinician actions including patient transfer modals, EHR note documentation, triage status reclassification, urgent review flagging, and one-click clinical CSV profile export.
 
-### 5. 🩺 Staff & Doctor Duty Coverage
+### 5.  Staff & Doctor Duty Coverage
 * **Coverage Matrix**: Real-time ratio tracking for physicians and nurses per department.
 * **Schedule Conflict Detection**: Automatic identification of overlapping shifts, uncovered peak windows, and rapid "Find On-Call Coverage" dispatch.
 
-### 6. 🔮 Predictive Surge & What-If Scenario Planner
+### 6.  Predictive Surge & What-If Scenario Planner
 * **Simulation Engine**: Interactive modeling of admissions surges ($+15\%$), ICU bed outages, and length-of-stay extensions.
 * **Side-by-Side Comparison**: Live projection of ICU buffer impact, emergency wait times, and staffing pressure with recommended mitigation protocols.
 
-### 7. 🔐 Clinician Access Gateway & Registration
+### 7.  Clinician Access Gateway & Registration
 * **Role-Based Workspaces**: Tailored interfaces for Hospital Administrators, Attending Physicians, Bed & Operations Managers, and Nursing Staff.
 * **Registration & Sign-In**: Clinician account registration with medical license/badge validation, HIPAA compliance acknowledgement, Google Sign-In, and instant 1-click verified demo profiles.
 
