@@ -124,4 +124,3 @@ npm run build
 
 ---
 
-*MediFlow Operations Command Center · Verified for Healthcare Operations Systems*
