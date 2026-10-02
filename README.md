@@ -1,4 +1,4 @@
-# MediFlow — Hospital Operations Command Center
+# MediFlow - Hospital Operations Command Center
 
 > A real-time, clinical-grade hospital command center and spatial operations platform designed for healthcare administrators, emergency physicians, operations managers, and nursing supervisors.
 
@@ -101,14 +101,6 @@ src/
 
 ---
 
-## 🚀 Local Development
-
-### Prerequisites
-* **Node.js**: v18.0.0 or higher
-* **npm**: v9.0.0 or higher
-
-### Setup & Run
-```bash
 # Install dependencies
 npm install
 
