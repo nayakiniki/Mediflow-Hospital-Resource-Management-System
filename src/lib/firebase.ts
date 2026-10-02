@@ -1,9 +1,21 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { initializeFirestore, doc, getDocFromServer } from 'firebase/firestore';
-import firebaseConfig from '../../firebase-applet-config.json';
 
-const app = initializeApp(firebaseConfig);
+// Environment-aware configuration (resolves cleanly on Vercel, GitHub, and local environments)
+const env = ((import.meta as any).env || {}) as Record<string, string>;
+
+export const firebaseConfig = {
+  apiKey: env.VITE_FIREBASE_API_KEY || "AIzaSyDummyKeyForBuildVerificationOnly",
+  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN || "ai-studio-5eda1bf1-d2e8-45fa-806b-c9db72ef2ddc.firebaseapp.com",
+  projectId: env.VITE_FIREBASE_PROJECT_ID || "ai-studio-5eda1bf1-d2e8-45fa-806b-c9db72ef2ddc",
+  storageBucket: env.VITE_FIREBASE_STORAGE_BUCKET || "ai-studio-5eda1bf1-d2e8-45fa-806b-c9db72ef2ddc.appspot.com",
+  messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID || "100631651180",
+  appId: env.VITE_FIREBASE_APP_ID || "1:100631651180:web:5eda1bf1d2e845fa806bc9db",
+  firestoreDatabaseId: env.VITE_FIREBASE_DATABASE_ID || "ai-studio-5eda1bf1-d2e8-45fa-806b-c9db72ef2ddc"
+};
+
+const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 // Use initializeFirestore to enable experimentalForceLongPolling, 

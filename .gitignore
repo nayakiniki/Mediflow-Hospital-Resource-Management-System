@@ -96,6 +96,3 @@ cypress/videos/
 
 # Firebase cache
 .firebase/
-
-# Project configuration that shouldn't be shared
-firebase-applet-config.json
