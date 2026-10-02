@@ -11,7 +11,7 @@ MediFlow delivers continuous operational situational awareness, combining 3D spa
 MediFlow is built as a high-density, mission-critical operations system. The visual design adheres to a signature command-center aesthetic—deep obsidian and pine canvases (`#0B1710`, `#13251B`) paired with classical typography (Cinzel & Plus Jakarta Sans), high-contrast clinical indicators, and subtle directional motion.
 
 ### Technology Stack
-* **Frontend**: React 19 + TypeScript + Vite
+* **Frontend**: React  + TypeScript + Vite
 * **3D Spatial Visualization**: Three.js (WebGL rendering with true isometric camera projections, interactive raycasting, and accessible 2D matrix fallbacks)
 * **Styling & Design System**: Tailwind CSS v4 with custom MediFlow theme variables and typography
 * **Motion & Page Transitions**: Framer Motion (subtle, accessible transitions respecting `prefers-reduced-motion`)
