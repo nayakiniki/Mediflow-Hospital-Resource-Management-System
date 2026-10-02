@@ -62,7 +62,7 @@ MediFlow is built as a high-density, mission-critical operations system. The vis
 
 ### 7.  Clinician Access Gateway & Registration
 * **Role-Based Workspaces**: Tailored interfaces for Hospital Administrators, Attending Physicians, Bed & Operations Managers, and Nursing Staff.
-* **Registration & Sign-In**: Clinician account registration with medical license/badge validation, HIPAA compliance acknowledgement, Google Sign-In, and instant 1-click verified demo profiles.
+* **Registration & Sign-In**: Clinician account registration with medical license/badge validation, Google Sign-In, and instant 1-click verified demo profiles.
 
 ---
 

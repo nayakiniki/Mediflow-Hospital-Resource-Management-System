@@ -27,14 +27,16 @@ export const KPIGrid: React.FC<KPIGridProps> = ({
       {/* Card 1: Total Patients */}
       <div 
         onClick={() => onNavigate && onNavigate('patients')}
-        className="bg-[#13251B] hover:bg-[#183124] rounded-2xl p-5 border border-[#234230] hover:border-[#38644A] shadow-xl hover:shadow-2xl transition-all duration-200 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0 group flex flex-col justify-between"
+        className="glossy-card rounded-2xl p-5 cursor-pointer transform hover:-translate-y-1 active:translate-y-0 group flex flex-col justify-between"
       >
         <div className="flex items-center justify-between text-slate-400 text-xs">
-          <span className="font-medium group-hover:text-slate-200 transition-colors">Total Patients</span>
-          <Users className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
+          <span className="font-medium group-hover:text-slate-100 transition-colors">Total Patients</span>
+          <div className="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]">
+            <Users className="w-4 h-4 text-emerald-400" />
+          </div>
         </div>
         <div className="mt-4">
-          <div className="text-3xl font-mono font-bold text-white tracking-tight">
+          <div className="text-3xl font-mono font-bold text-white tracking-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
             {metrics.totalPatients}
           </div>
           <div className="mt-1.5 flex items-center justify-between">
@@ -42,11 +44,11 @@ export const KPIGrid: React.FC<KPIGridProps> = ({
               <ArrowUpRight className="w-3.5 h-3.5" />
               <span>+{metrics.patientsTrendToday} today</span>
             </span>
-            <span className="text-[10px] font-mono text-slate-500">Intake active</span>
+            <span className="text-[10px] font-mono text-slate-400">Intake active</span>
           </div>
-          {/* Subtle Progress Track */}
-          <div className="w-full h-1 bg-[#0B1710] rounded-full mt-3 overflow-hidden">
-            <div className="h-full bg-emerald-500 rounded-full transition-all duration-500" style={{ width: '74%' }} />
+          {/* Subtle Progress Track with gloss */}
+          <div className="w-full h-1.5 bg-[#0B1710] rounded-full mt-3 overflow-hidden shadow-inner border border-white/5">
+            <div className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all duration-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" style={{ width: '74%' }} />
           </div>
         </div>
       </div>
@@ -54,24 +56,26 @@ export const KPIGrid: React.FC<KPIGridProps> = ({
       {/* Card 2: Available Beds */}
       <div 
         onClick={() => onNavigate && onNavigate('beds')}
-        className="bg-[#13251B] hover:bg-[#183124] rounded-2xl p-5 border border-[#234230] hover:border-[#38644A] shadow-xl hover:shadow-2xl transition-all duration-200 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0 group flex flex-col justify-between"
+        className="glossy-card rounded-2xl p-5 cursor-pointer transform hover:-translate-y-1 active:translate-y-0 group flex flex-col justify-between"
       >
         <div className="flex items-center justify-between text-slate-400 text-xs">
-          <span className="font-medium group-hover:text-slate-200 transition-colors">Available Beds</span>
-          <Bed className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
+          <span className="font-medium group-hover:text-slate-100 transition-colors">Available Beds</span>
+          <div className="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]">
+            <Bed className="w-4 h-4 text-emerald-400" />
+          </div>
         </div>
         <div className="mt-4">
-          <div className="text-3xl font-mono font-bold text-white tracking-tight">
+          <div className="text-3xl font-mono font-bold text-white tracking-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
             {metrics.availableBeds}
           </div>
           <div className="mt-1.5 flex items-center justify-between">
             <span className="text-xs text-emerald-300 font-mono">
               {metrics.icuBedsAvailable} ICU beds free
             </span>
-            <span className="text-[10px] font-mono text-slate-500">38 / 246 total</span>
+            <span className="text-[10px] font-mono text-slate-400">38 / 246 total</span>
           </div>
-          <div className="w-full h-1 bg-[#0B1710] rounded-full mt-3 overflow-hidden">
-            <div className="h-full bg-emerald-500 rounded-full transition-all duration-500" style={{ width: '38%' }} />
+          <div className="w-full h-1.5 bg-[#0B1710] rounded-full mt-3 overflow-hidden shadow-inner border border-white/5">
+            <div className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all duration-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" style={{ width: '38%' }} />
           </div>
         </div>
       </div>
@@ -79,47 +83,49 @@ export const KPIGrid: React.FC<KPIGridProps> = ({
       {/* Card 3: Doctors On Duty */}
       <div 
         onClick={() => onNavigate && onNavigate('staff')}
-        className="bg-[#13251B] hover:bg-[#183124] rounded-2xl p-5 border border-[#234230] hover:border-[#38644A] shadow-xl hover:shadow-2xl transition-all duration-200 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0 group flex flex-col justify-between"
+        className="glossy-card rounded-2xl p-5 cursor-pointer transform hover:-translate-y-1 active:translate-y-0 group flex flex-col justify-between"
       >
         <div className="flex items-center justify-between text-slate-400 text-xs">
-          <span className="font-medium group-hover:text-slate-200 transition-colors">Doctors On Duty</span>
-          <Stethoscope className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
+          <span className="font-medium group-hover:text-slate-100 transition-colors">Doctors On Duty</span>
+          <div className="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]">
+            <Stethoscope className="w-4 h-4 text-emerald-400" />
+          </div>
         </div>
         <div className="mt-4">
-          <div className="text-3xl font-mono font-bold text-white tracking-tight">
+          <div className="text-3xl font-mono font-bold text-white tracking-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
             {metrics.doctorsOnDuty}
           </div>
           <div className="mt-1.5 flex items-center justify-between">
             <span className="text-xs text-emerald-300 font-mono">
               {metrics.staffCoveragePercent}% coverage
             </span>
-            <span className="text-[10px] font-mono text-slate-500">5 departments</span>
+            <span className="text-[10px] font-mono text-slate-400">5 departments</span>
           </div>
-          <div className="w-full h-1 bg-[#0B1710] rounded-full mt-3 overflow-hidden">
-            <div className="h-full bg-emerald-500 rounded-full transition-all duration-500" style={{ width: `${metrics.staffCoveragePercent}%` }} />
+          <div className="w-full h-1.5 bg-[#0B1710] rounded-full mt-3 overflow-hidden shadow-inner border border-white/5">
+            <div className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all duration-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" style={{ width: `${metrics.staffCoveragePercent}%` }} />
           </div>
         </div>
       </div>
 
       {/* Card 4: ICU Occupancy */}
       <div 
-        className="bg-[#13251B] hover:bg-[#183124] rounded-2xl p-5 border border-[#234230] hover:border-[#38644A] shadow-xl hover:shadow-2xl transition-all duration-200 relative group flex flex-col justify-between"
+        className="glossy-card rounded-2xl p-5 relative group flex flex-col justify-between"
       >
         <div className="flex items-center justify-between text-slate-400 text-xs">
-          <span className="font-medium group-hover:text-slate-200 transition-colors">ICU Occupancy</span>
+          <span className="font-medium group-hover:text-slate-100 transition-colors">ICU Occupancy</span>
           <button
             onClick={(e) => {
               e.stopPropagation();
               setExplainIcu(!explainIcu);
             }}
-            className="text-slate-400 hover:text-white transition-colors"
+            className="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white transition-colors cursor-pointer shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]"
             title="Explain this number"
           >
             <Info className="w-4 h-4" />
           </button>
         </div>
         <div className="mt-4">
-          <div className="text-3xl font-mono font-bold text-rose-400 tracking-tight">
+          <div className="text-3xl font-mono font-bold text-rose-400 tracking-tight drop-shadow-[0_2px_8px_rgba(244,63,94,0.3)]">
             {metrics.icuOccupancyPercent}%
           </div>
           <div className="mt-1.5 flex items-center justify-between">
@@ -127,10 +133,10 @@ export const KPIGrid: React.FC<KPIGridProps> = ({
               <ArrowUpRight className="w-3.5 h-3.5" />
               <span>+8% since yesterday</span>
             </span>
-            <span className="text-[10px] font-mono text-rose-400">Critical</span>
+            <span className="text-[10px] font-mono text-rose-400 font-bold uppercase">Critical</span>
           </div>
-          <div className="w-full h-1 bg-[#0B1710] rounded-full mt-3 overflow-hidden">
-            <div className="h-full bg-rose-500 rounded-full transition-all duration-500" style={{ width: `${metrics.icuOccupancyPercent}%` }} />
+          <div className="w-full h-1.5 bg-[#0B1710] rounded-full mt-3 overflow-hidden shadow-inner border border-white/5">
+            <div className="h-full bg-gradient-to-r from-rose-500 to-rose-400 rounded-full transition-all duration-500 shadow-[0_0_8px_rgba(244,63,94,0.5)]" style={{ width: `${metrics.icuOccupancyPercent}%` }} />
           </div>
         </div>
 

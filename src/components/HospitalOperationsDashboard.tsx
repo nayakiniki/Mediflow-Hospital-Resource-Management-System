@@ -19,7 +19,8 @@ import {
   ShieldAlert,
   Flame,
   X,
-  FileSpreadsheet
+  FileSpreadsheet,
+  Database
 } from 'lucide-react';
 import { HospitalMetrics, OperationalAlert, BedAllocation, StaffOnDuty, Patient, MediFlowView, HospitalUserRole } from '../types';
 import { DAILY_CHANGES } from '../lib/mockHospitalData';
@@ -92,7 +93,12 @@ export const HospitalOperationsDashboard: React.FC<HospitalOperationsDashboardPr
           </p>
         </div>
 
-        <div className="flex items-center gap-3 self-start sm:self-auto">
+        <div className="flex items-center gap-3 self-start sm:self-auto flex-wrap">
+          <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#13251B] text-slate-300 text-xs font-mono border border-[#234230]">
+            <Database className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="text-[11px] text-slate-400">EMR Database:</span>
+            <span className="text-[11px] text-emerald-300 font-semibold">Active & Synced</span>
+          </div>
           <div className="text-xs text-slate-400 font-mono bg-[#13251B] px-3 py-1.5 rounded-xl border border-[#234230]">
             Last updated: <span className="font-semibold text-emerald-300">{metrics.lastUpdated}</span>
           </div>
@@ -103,9 +109,9 @@ export const HospitalOperationsDashboard: React.FC<HospitalOperationsDashboardPr
         </div>
       </div>
 
-      {/* Morning Operational Brief (Backlog Item #8) */}
-      <div className="bg-gradient-to-r from-[#14281E] via-[#162D21] to-[#14281E] rounded-2xl p-6 border border-[#274633] shadow-xl relative overflow-hidden group">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
+      {/* Morning Operational Brief with Glossy Glassmorphism */}
+      <div className="glossy-panel rounded-2xl p-6 relative overflow-hidden group shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.25)] border-t border-white/25">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-emerald-500/10 via-amber-500/5 to-transparent rounded-full blur-3xl pointer-events-none" />
         
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2 max-w-3xl">

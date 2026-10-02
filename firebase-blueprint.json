@@ -8,8 +8,9 @@
         "uid": { "type": "string" },
         "email": { "type": "string", "format": "email" },
         "displayName": { "type": "string" },
-        "role": { "type": "string", "enum": ["clinician", "physician", "auditor"] },
+        "role": { "type": "string", "enum": ["clinician", "physician", "auditor", "doctor", "administrator", "operations_manager", "nursing_staff", "management"] },
         "department": { "type": "string" },
+        "licenseId": { "type": "string" },
         "createdAt": { "type": "string", "format": "date-time" }
       },
       "required": ["uid", "email", "role"]
@@ -30,6 +31,61 @@
         "createdAt": { "type": "string", "format": "date-time" }
       },
       "required": ["id", "userId", "title", "filename", "status", "report_summary"]
+    },
+    "Patient": {
+      "title": "Hospital Patient Record",
+      "description": "Active hospital inpatient and emergency department patient records.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "name": { "type": "string", "maxLength": 150 },
+        "age": { "type": "number" },
+        "gender": { "type": "string", "enum": ["Male", "Female", "Other"] },
+        "severity": { "type": "number" },
+        "risk": { "type": "number" },
+        "waitTime": { "type": "string", "maxLength": 50 },
+        "status": { "type": "string", "enum": ["Critical", "Urgent", "Stable", "Discharged"] },
+        "bed": { "type": "string", "maxLength": 50 },
+        "department": { "type": "string", "maxLength": 100 },
+        "chiefComplaint": { "type": "string", "maxLength": 1000 },
+        "admittedAt": { "type": "string", "maxLength": 50 },
+        "lastUpdated": { "type": "string", "maxLength": 50 },
+        "flaggedForReview": { "type": "boolean" },
+        "sepsisIndicator": { "type": "string", "maxLength": 50 },
+        "aiRecommendation": { "type": "string", "maxLength": 2000 }
+      },
+      "required": ["id", "name", "age", "status", "department"]
+    },
+    "OperationalAlert": {
+      "title": "Operational Hospital Alert",
+      "description": "Hospital clinical and infrastructure operational alerts.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "title": { "type": "string", "maxLength": 300 },
+        "category": { "type": "string", "enum": ["ICU", "Emergency", "Inventory", "Staffing", "Telemetry"] },
+        "severity": { "type": "string", "enum": ["Critical", "Warning", "Info"] },
+        "timeAgo": { "type": "string", "maxLength": 50 },
+        "timestamp": { "type": "string", "maxLength": 50 },
+        "actionRequired": { "type": "string", "maxLength": 1000 },
+        "resolved": { "type": "boolean" }
+      },
+      "required": ["id", "title", "severity", "actionRequired", "resolved"]
+    },
+    "BedAllocation": {
+      "title": "Ward Bed Allocation",
+      "description": "Departmental bed census, availability, and occupancy state.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "ward": { "type": "string", "maxLength": 100 },
+        "occupied": { "type": "number" },
+        "total": { "type": "number" },
+        "available": { "type": "number" },
+        "cleaning": { "type": "number" },
+        "occupancyRate": { "type": "number" }
+      },
+      "required": ["id", "ward", "occupied", "total", "available"]
     }
   },
   "firestore": {
@@ -40,6 +96,18 @@
     "/users/{userId}/reports/{reportId}": {
       "schema": "ClinicalReport",
       "description": "Stores analyzed clinical documentation history belonging to the clinician."
+    },
+    "/patients/{patientId}": {
+      "schema": "Patient",
+      "description": "Hospital electronic health records and queue status."
+    },
+    "/alerts/{alertId}": {
+      "schema": "OperationalAlert",
+      "description": "Live hospital command center operational and capacity alerts."
+    },
+    "/beds/{bedId}": {
+      "schema": "BedAllocation",
+      "description": "Department bed allocation and real-time census tracking."
     }
   }
 }

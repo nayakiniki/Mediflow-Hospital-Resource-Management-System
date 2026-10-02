@@ -31,7 +31,7 @@ service cloud.firestore {
     function isValidUser(data) {
       return data.uid == request.auth.uid 
         && data.email is string && data.email.size() <= 256
-        && data.role in ['clinician', 'physician', 'auditor']
+        && data.role in ['clinician', 'physician', 'auditor', 'doctor', 'administrator', 'operations_manager', 'nursing_staff', 'management']
         && (data.keys().hasAll(['uid', 'email', 'role']));
     }
 
@@ -46,6 +46,34 @@ service cloud.firestore {
         && (data.keys().hasAll(['id', 'userId', 'title', 'filename', 'status', 'report_summary']));
     }
 
+    // Patient validation helper
+    function isValidPatient(data) {
+      return data.id is string && isValidId(data.id)
+        && data.name is string && data.name.size() > 0 && data.name.size() <= 150
+        && data.age is number
+        && data.status in ['Critical', 'Urgent', 'Stable', 'Discharged']
+        && (data.keys().hasAll(['id', 'name', 'age', 'status', 'department']));
+    }
+
+    // Alert validation helper
+    function isValidAlert(data) {
+      return data.id is string && isValidId(data.id)
+        && data.title is string && data.title.size() > 0 && data.title.size() <= 300
+        && data.severity in ['Critical', 'Warning', 'Info']
+        && data.resolved is bool
+        && (data.keys().hasAll(['id', 'title', 'severity', 'actionRequired', 'resolved']));
+    }
+
+    // Bed allocation validation helper
+    function isValidBed(data) {
+      return data.id is string && isValidId(data.id)
+        && data.ward is string && data.ward.size() > 0 && data.ward.size() <= 100
+        && data.occupied is number
+        && data.total is number
+        && data.available is number
+        && (data.keys().hasAll(['id', 'ward', 'occupied', 'total', 'available']));
+    }
+
     // --- Collections ---
 
     // Clinician User Profiles
@@ -54,7 +82,7 @@ service cloud.firestore {
       allow list: if false;
       allow create: if isOwner(userId) && isValidId(userId) && isValidUser(incoming());
       allow update: if isOwner(userId) && isValidId(userId) && isValidUser(incoming()) 
-        && incoming().diff(existing()).affectedKeys().hasOnly(['displayName', 'department']);
+        && incoming().diff(existing()).affectedKeys().hasOnly(['displayName', 'department', 'licenseId']);
       allow delete: if false;
 
       // Clinician Saved Reports & History Subcollection
@@ -66,6 +94,27 @@ service cloud.firestore {
           && incoming().diff(existing()).affectedKeys().hasOnly(['title', 'status', 'report_summary']);
         allow delete: if isOwner(userId) && isValidId(reportId);
       }
+    }
+
+    // Hospital Patients Registry
+    match /patients/{patientId} {
+      allow get, list: if true;
+      allow create, update: if isValidId(patientId) && isValidPatient(incoming());
+      allow delete: if isSignedIn() && isValidId(patientId);
+    }
+
+    // Operational Command Alerts
+    match /alerts/{alertId} {
+      allow get, list: if true;
+      allow create, update: if isValidId(alertId) && isValidAlert(incoming());
+      allow delete: if isSignedIn() && isValidId(alertId);
+    }
+
+    // Department Bed Census
+    match /beds/{bedId} {
+      allow get, list: if true;
+      allow create, update: if isValidId(bedId) && isValidBed(incoming());
+      allow delete: if isSignedIn() && isValidId(bedId);
     }
   }
 }

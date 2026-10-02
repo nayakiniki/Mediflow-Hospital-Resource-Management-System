@@ -14,7 +14,8 @@ import {
   X,
   FileSpreadsheet,
   Flame,
-  Activity
+  Activity,
+  Database
 } from 'lucide-react';
 import { Patient } from '../types';
 
@@ -136,7 +137,11 @@ export const CriticalPatientQueue: React.FC<CriticalPatientQueueProps> = ({
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap">
+          <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#13251B] border border-[#234230] text-[11px] font-mono text-slate-300">
+            <Database className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Database: {patients.length} Live Records</span>
+          </div>
           <button
             onClick={handleExportQueueCSV}
             className="px-3.5 py-1.5 rounded-xl bg-[#1C3326] hover:bg-[#234230] text-slate-200 border border-[#2F523C] text-xs font-semibold transition-all flex items-center gap-1.5"

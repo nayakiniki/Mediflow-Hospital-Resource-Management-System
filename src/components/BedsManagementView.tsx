@@ -44,7 +44,7 @@ export const BedsManagementView: React.FC<BedsManagementViewProps> = ({
   // Allocation modal
   const [allocateModalOpen, setAllocateModalOpen] = useState(false);
   const [selectedBed, setSelectedBed] = useState<BedItem | null>(null);
-  const [patientAssignName, setPatientAssignName] = useState('P-1024 (Robert Hastings)');
+  const [patientAssignName, setPatientAssignName] = useState('P-1024 (Ramesh Sharma)');
 
   const showToast = (msg: string) => {
     setToastMsg(msg);

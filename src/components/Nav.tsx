@@ -127,10 +127,12 @@ export const Nav: React.FC<NavProps> = ({
                   )}
                   <div className="hidden lg:block text-xs">
                     <p className="font-semibold text-slate-900 leading-tight">
-                      {user.displayName || user.email?.split('@')[0]}
+                      {user.displayName && !user.displayName.toLowerCase().includes('nikita') && !user.displayName.toLowerCase().includes('nayak')
+                        ? user.displayName 
+                        : 'Hospital Medical Staff'}
                     </p>
                     <p className="text-[10px] text-teal-700 font-medium">
-                      {profile?.role || 'Clinician'}
+                      {profile?.role || 'Medical Staff'}
                     </p>
                   </div>
                   <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
@@ -143,11 +145,15 @@ export const Nav: React.FC<NavProps> = ({
                     onClick={() => setDropdownOpen(false)}
                   >
                     <div className="px-4 py-2.5 border-b border-slate-100">
-                      <p className="font-bold text-slate-900 text-sm">{user.displayName || 'Clinician'}</p>
+                      <p className="font-bold text-slate-900 text-sm">
+                        {user.displayName && !user.displayName.toLowerCase().includes('nikita') && !user.displayName.toLowerCase().includes('nayak')
+                          ? user.displayName 
+                          : 'Hospital Medical Staff'}
+                      </p>
                       <p className="text-slate-500 truncate">{user.email}</p>
                       <div className="mt-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-teal-50 text-teal-800 font-medium text-[11px] border border-teal-200">
                         <ShieldCheck className="w-3 h-3 text-teal-600" />
-                        <span>Role: {profile?.role || 'Clinician'}</span>
+                        <span>Role: {profile?.role || 'Medical Staff'}</span>
                       </div>
                     </div>
 
@@ -170,11 +176,11 @@ export const Nav: React.FC<NavProps> = ({
             ) : (
               <button
                 onClick={onSignIn}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-2xs"
-                title="Sign in with Clinician Account"
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md glossy-button"
+                title="Sign in with Staff Account"
               >
                 <LogIn className="w-3.5 h-3.5" />
-                <span>Clinician Sign In</span>
+                <span>Staff Sign In</span>
               </button>
             )}
           </div>

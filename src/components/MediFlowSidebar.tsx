@@ -74,15 +74,15 @@ export const MediFlowSidebar: React.FC<MediFlowSidebarProps> = ({
   ];
 
   return (
-    <aside className="w-64 bg-[#122219] border-r border-[#1F3729] flex flex-col justify-between shrink-0 select-none text-slate-300">
+    <aside className="w-64 bg-gradient-to-b from-[#14281E] via-[#0F1E16] to-[#0A1610] border-r border-white/10 flex flex-col justify-between shrink-0 select-none text-slate-300 shadow-[4px_0_30px_rgba(0,0,0,0.55),inset_-1px_0_0_rgba(255,255,255,0.08)]">
       <div>
         {/* Brand Header */}
-        <div className="p-6 border-b border-[#1F3729] flex items-center justify-between">
+        <div className="p-6 border-b border-white/10 flex items-center justify-between">
           <div 
             onClick={() => onNavigate('landing')}
             className="cursor-pointer group"
           >
-            <h2 className="font-serif text-2xl font-bold tracking-tight text-[#C93838] group-hover:text-[#E88F89] transition-colors">
+            <h2 className="font-serif text-2xl font-bold tracking-tight text-[#E88F89] group-hover:text-white transition-colors drop-shadow-[0_2px_8px_rgba(232,143,137,0.3)]">
               MEDIFLOW
             </h2>
             <p className="text-[10px] text-slate-400 font-mono tracking-wider uppercase">
@@ -92,7 +92,7 @@ export const MediFlowSidebar: React.FC<MediFlowSidebarProps> = ({
 
           <button
             onClick={() => onNavigate('landing')}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-white/5 transition-colors"
+            className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors border border-transparent hover:border-white/15"
             title="Overview & Hero Page"
           >
             <Home className="w-4 h-4" />
@@ -100,16 +100,16 @@ export const MediFlowSidebar: React.FC<MediFlowSidebarProps> = ({
         </div>
 
         {/* Workspace Role Selector (Backlog Section 2) */}
-        <div className="p-3 border-b border-[#1F3729]/80">
+        <div className="p-3 border-b border-white/10">
           <button
             onClick={() => setRoleModalOpen(true)}
-            className="w-full p-2.5 rounded-xl bg-[#172D21] hover:bg-[#1D382A] border border-white/5 text-left transition-colors flex items-center justify-between group"
+            className="w-full p-2.5 rounded-xl bg-gradient-to-b from-white/10 to-white/5 hover:from-white/15 hover:to-white/10 border border-white/15 text-left transition-all flex items-center justify-between group shadow-[0_4px_12px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.2)]"
           >
             <div className="truncate pr-2">
               <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">
                 Workspace Role
               </span>
-              <span className="text-xs font-bold text-slate-200 truncate flex items-center gap-1.5 mt-0.5">
+              <span className="text-xs font-bold text-slate-100 truncate flex items-center gap-1.5 mt-0.5">
                 <span>{currentRoleInfo.icon}</span>
                 <span className="truncate">{currentRoleInfo.title}</span>
               </span>
@@ -130,8 +130,8 @@ export const MediFlowSidebar: React.FC<MediFlowSidebarProps> = ({
                 onClick={() => onNavigate(item.id)}
                 className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
                   isActive
-                    ? 'bg-[#1E3A2B] text-white shadow-xs border-l-3 border-[#E88F89]'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
+                    ? 'bg-gradient-to-r from-[#244633] to-[#1C3829] text-white border-t border-white/25 border-b border-black/50 shadow-[0_6px_16px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.3)]'
+                    : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -151,29 +151,33 @@ export const MediFlowSidebar: React.FC<MediFlowSidebarProps> = ({
       </div>
 
       {/* Bottom Command Center / Admin View */}
-      <div className="p-4 border-t border-[#1F3729]">
-        <div className="p-3 rounded-xl bg-[#172D21] border border-white/5 flex items-center justify-between mb-3">
+      <div className="p-4 border-t border-white/10">
+        <div className="p-3 rounded-xl bg-gradient-to-b from-white/10 to-white/5 border border-white/15 flex items-center justify-between mb-3 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+            <div className="w-7 h-7 rounded-lg bg-emerald-500/15 border border-emerald-400/40 flex items-center justify-center text-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.25)]">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             </div>
             <div>
-              <p className="text-[11px] font-bold text-slate-200 leading-tight">Command Center</p>
-              <p className="text-[10px] text-emerald-400 font-mono">Admin view</p>
+              <p className="text-[11px] font-bold text-slate-100 leading-tight">Command Center</p>
+              <p className="text-[10px] text-emerald-400 font-mono">Operations Active</p>
             </div>
           </div>
         </div>
 
-        {/* Firebase Clinician Auth Status */}
+        {/* Firebase Staff Auth Status */}
         {user ? (
-          <div className="flex items-center justify-between p-2 rounded-lg bg-white/5 text-[11px]">
+          <div className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 text-[11px] border border-white/15 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]">
             <div className="truncate mr-2">
-              <p className="font-semibold text-slate-200 truncate">{user.displayName || user.email}</p>
-              <p className="text-[10px] text-emerald-400">Verified Clinician</p>
+              <p className="font-semibold text-slate-100 truncate">
+                {user.displayName && !user.displayName.toLowerCase().includes('nikita') && !user.displayName.toLowerCase().includes('nayak')
+                  ? user.displayName
+                  : 'Hospital Command Staff'}
+              </p>
+              <p className="text-[10px] text-emerald-400 font-mono">Authorized Session</p>
             </div>
             <button
               onClick={onSignOut}
-              className="p-1.5 text-slate-400 hover:text-rose-400 transition-colors"
+              className="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-white/10 transition-colors cursor-pointer"
               title="Sign Out"
             >
               <LogOut className="w-3.5 h-3.5" />
@@ -182,10 +186,10 @@ export const MediFlowSidebar: React.FC<MediFlowSidebarProps> = ({
         ) : (
           <button
             onClick={onSignIn}
-            className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold bg-[#E88F89] text-slate-950 hover:bg-[#eb9d97] transition-all cursor-pointer shadow-xs active:scale-98"
+            className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold bg-[#E88F89] text-slate-950 hover:bg-[#eb9d97] transition-all cursor-pointer glossy-button"
           >
             <LogIn className="w-3.5 h-3.5" />
-            <span>Clinician Sign In / Register</span>
+            <span>Staff Sign In / Register</span>
           </button>
         )}
       </div>

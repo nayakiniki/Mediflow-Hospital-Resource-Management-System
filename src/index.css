@@ -69,6 +69,65 @@ body {
   box-shadow: 0 4px 16px -2px rgba(201, 56, 56, 0.35);
 }
 
+/* Glossy glassmorphic and specular effects */
+.glossy-panel {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 40%, rgba(0, 0, 0, 0.25) 100%), rgba(20, 38, 28, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0.32);
+  box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.glossy-card {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.015) 30%, rgba(0, 0, 0, 0.35) 100%), rgba(18, 35, 26, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.55), inset 0 1px 0 0 rgba(255, 255, 255, 0.16);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glossy-card:hover {
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.65), 0 0 24px -2px rgba(232, 143, 137, 0.15), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+}
+
+.glossy-button {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.35), inset 0 1px 1px 0 rgba(255, 255, 255, 0.45), inset 0 -1px 2px 0 rgba(0, 0, 0, 0.3);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glossy-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.04) 100%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.glossy-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.4), inset 0 1px 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.glossy-sheen {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.3) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-top: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.12), inset 0 1px 2px 0 rgba(255, 255, 255, 0.85);
+}
+
 /* Topo background pattern */
 .topo-pattern {
   background-image: radial-gradient(rgba(34, 197, 94, 0.06) 1px, transparent 1px);

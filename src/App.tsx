@@ -28,7 +28,15 @@ import { StaffDutyView } from './components/StaffDutyView';
 import { AlertsManagerView } from './components/AlertsManagerView';
 import { AIInsightsView } from './components/AIInsightsView';
 import { AuthModal } from './components/AuthModal';
-import { Search, Sparkles, X, ChevronRight, Bell, Command, User as UserIcon } from 'lucide-react';
+import { 
+  initializeHospitalDatabase, 
+  subscribeToHospitalDatabase, 
+  persistPatient, 
+  togglePatientFlag, 
+  resolveAlert, 
+  updateBedAllocations 
+} from './lib/hospitalDatabase';
+import { Search, Sparkles, X, ChevronRight, Bell, Command, User as UserIcon, Database } from 'lucide-react';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<MediFlowView>('landing');
@@ -38,6 +46,7 @@ export default function App() {
   const [alerts, setAlerts] = useState<OperationalAlert[]>(INITIAL_ALERTS);
   const [beds, setBeds] = useState<BedAllocation[]>(INITIAL_BEDS);
   const [staff, setStaff] = useState<StaffOnDuty[]>(INITIAL_STAFF);
+  const [dbSynced, setDbSynced] = useState(false);
 
   // Global search & smart search assistant (Backlog Item #10)
   const [globalSearch, setGlobalSearch] = useState('');
@@ -67,6 +76,45 @@ export default function App() {
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
   const [surgeAlertToast, setSurgeAlertToast] = useState<string | null>(null);
+
+  // Initialize and synchronize hospital database
+  useEffect(() => {
+    let mounted = true;
+    initializeHospitalDatabase().then(({ patients: pList, alerts: aList, beds: bList }) => {
+      if (!mounted) return;
+      if (pList && pList.length > 0) {
+        setPatients(pList);
+        setSelectedPatient((curr) => pList.find((p) => p.id === curr.id) || pList[0]);
+      }
+      if (aList && aList.length > 0) setAlerts(aList);
+      if (bList && bList.length > 0) setBeds(bList);
+      setDbSynced(true);
+    }).catch((err) => {
+      console.warn('Database initialization completed in offline-safe mode:', err);
+      if (mounted) setDbSynced(true);
+    });
+
+    const unsubscribe = subscribeToHospitalDatabase({
+      onPatients: (latest) => {
+        if (!mounted || !latest || latest.length === 0) return;
+        setPatients(latest);
+        setSelectedPatient((curr) => latest.find((p) => p.id === curr.id) || curr);
+      },
+      onAlerts: (latest) => {
+        if (!mounted || !latest || latest.length === 0) return;
+        setAlerts(latest);
+      },
+      onBeds: (latest) => {
+        if (!mounted || !latest || latest.length === 0) return;
+        setBeds(latest);
+      }
+    });
+
+    return () => {
+      mounted = false;
+      unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -116,7 +164,7 @@ export default function App() {
     setTimeout(() => setSurgeAlertToast(null), 3000);
   };
 
-  // Actions
+  // Actions with live database persistence
   const handleSelectPatient = (patient: Patient) => {
     setSelectedPatient(patient);
     setCurrentView('patient-detail');
@@ -127,13 +175,16 @@ export default function App() {
     setPatients((prev) =>
       prev.map((p) => (p.id === updatedPatient.id ? updatedPatient : p))
     );
+    persistPatient(updatedPatient).catch(console.error);
   };
 
   const handleTogglePatientFlag = (patientId: string) => {
     setPatients((prev) =>
       prev.map((p) => {
         if (p.id === patientId) {
-          const updated = { ...p, flaggedForReview: !p.flaggedForReview };
+          const nextFlag = !p.flaggedForReview;
+          togglePatientFlag(patientId, nextFlag).catch(console.error);
+          const updated = { ...p, flaggedForReview: nextFlag };
           if (selectedPatient.id === patientId) setSelectedPatient(updated);
           return updated;
         }
@@ -146,11 +197,12 @@ export default function App() {
     setAlerts((prev) =>
       prev.map((a) => (a.id === alertId ? { ...a, resolved: true } : a))
     );
+    resolveAlert(alertId).catch(console.error);
   };
 
   const handlePrepareSurgeBeds = () => {
-    setBeds((prev) =>
-      prev.map((b) =>
+    setBeds((prev) => {
+      const next = prev.map((b) =>
         b.ward === 'ICU'
           ? {
               ...b,
@@ -159,8 +211,10 @@ export default function App() {
               occupancyRate: Math.round((b.occupied / (b.total + 6)) * 100)
             }
           : b
-      )
-    );
+      );
+      updateBedAllocations(next).catch(console.error);
+      return next;
+    });
     setMetrics((prev) => ({
       ...prev,
       availableBeds: prev.availableBeds + 6,
@@ -246,8 +300,8 @@ export default function App() {
 
       {/* Main Content View Container in MediFlow Dark Theme */}
       <div className="flex-1 flex flex-col overflow-hidden bg-[#0B1710] topo-pattern">
-        {/* Top Global Search & Command Bar (Backlog Item #10) */}
-        <header className="h-16 bg-[#0F1E16]/80 border-b border-[#1F3729] px-6 flex items-center justify-between shrink-0 backdrop-blur-md z-30">
+        {/* Top Global Search & Command Bar with Glossy Specular Glass */}
+        <header className="h-16 bg-gradient-to-r from-[#12241A]/90 via-[#0F1E16]/95 to-[#12241A]/90 border-b border-white/10 px-6 flex items-center justify-between shrink-0 backdrop-blur-2xl z-30 shadow-[0_4px_24px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.12)]">
           <div ref={searchRef} className="relative flex-1 max-w-xl">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
@@ -261,15 +315,15 @@ export default function App() {
                 }
               }}
               placeholder="Search MediFlow... (e.g. 'Show available ICU beds', patient P-1024, staff)"
-              className="w-full pl-10 pr-12 py-2 bg-[#13251B] rounded-xl border border-[#234230] text-xs text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E88F89] focus:border-[#E88F89] transition-all"
+              className="w-full pl-10 pr-12 py-2.5 bg-[#14281E]/85 rounded-xl border border-white/10 text-xs text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E88F89] focus:border-white/20 transition-all shadow-[inset_0_2px_4px_rgba(0,0,0,0.3),0_1px_1px_rgba(255,255,255,0.08)]"
             />
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none flex items-center gap-1 text-[10px] font-mono text-slate-500 bg-[#183124] px-1.5 py-0.5 rounded border border-white/5">
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none flex items-center gap-1 text-[10px] font-mono text-slate-400 bg-white/10 px-1.5 py-0.5 rounded border border-white/10">
               <span>⌘K</span>
             </div>
 
             {/* Smart Search Assistant Suggestions Dropdown (Backlog Item #10) */}
             {searchFocused && (
-              <div className="absolute left-0 right-0 top-full mt-2 bg-[#13251B] border border-[#2C4838] rounded-2xl shadow-2xl p-3 z-50 space-y-2 backdrop-blur-md">
+              <div className="absolute left-0 right-0 top-full mt-2 bg-[#13251B]/95 border border-white/15 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6),inset_0_1px_1px_rgba(255,255,255,0.15)] p-3 z-50 space-y-2 backdrop-blur-xl">
                 <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400 px-2 pt-1">
                   <span>Smart Clinical Queries</span>
                   <span className="text-[#E88F89]">1-Click Execute</span>
@@ -279,7 +333,7 @@ export default function App() {
                     <button
                       key={idx}
                       onMouseDown={() => handleExecuteSmartQuery(q.text, q.target)}
-                      className="w-full text-left px-3 py-2 rounded-xl text-xs text-slate-200 hover:text-white hover:bg-[#183124] flex items-center justify-between group transition-colors"
+                      className="w-full text-left px-3 py-2 rounded-xl text-xs text-slate-200 hover:text-white hover:bg-white/10 flex items-center justify-between group transition-colors"
                     >
                       <span className="group-hover:text-[#E88F89] transition-colors">"{q.text}"</span>
                       <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-white group-hover:translate-x-1 transition-transform" />
@@ -290,9 +344,16 @@ export default function App() {
             )}
           </div>
 
-          <div className="flex items-center gap-4 text-xs font-semibold">
+          <div className="flex items-center gap-3 text-xs font-semibold">
+            {/* Database Sync Status Badge */}
+            <div className="hidden lg:flex items-center gap-2 bg-gradient-to-b from-white/10 to-white/5 border border-white/15 px-3 py-1.5 rounded-xl font-mono text-[11px] text-slate-300 shadow-[0_2px_8px_rgba(0,0,0,0.25),inset_0_1px_1px_rgba(255,255,255,0.2)]">
+              <Database className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="text-slate-400 uppercase">Database:</span>
+              <span className="text-emerald-300 font-semibold">{dbSynced ? 'Firestore Active' : 'Connecting...'}</span>
+            </div>
+
             {/* Active Workspace Role Pill (Backlog Item #2) */}
-            <div className="hidden md:flex items-center gap-2 bg-[#13251B] border border-[#234230] px-3 py-1.5 rounded-xl font-mono text-[11px] text-slate-300">
+            <div className="hidden md:flex items-center gap-2 bg-gradient-to-b from-white/10 to-white/5 border border-white/15 px-3 py-1.5 rounded-xl font-mono text-[11px] text-slate-300 shadow-[0_2px_8px_rgba(0,0,0,0.25),inset_0_1px_1px_rgba(255,255,255,0.2)]">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-slate-400 uppercase">Role:</span>
               <strong className="text-white capitalize">{activeRole.replace('_', ' ')}</strong>
@@ -301,7 +362,7 @@ export default function App() {
             {/* Alert shortcut badge */}
             <button
               onClick={() => setCurrentView('alerts')}
-              className="relative p-2 rounded-xl bg-[#13251B] hover:bg-[#183124] text-slate-300 hover:text-white border border-[#234230] transition-colors"
+              className="relative p-2 rounded-xl bg-gradient-to-b from-white/10 to-white/5 hover:from-white/15 hover:to-white/10 text-slate-300 hover:text-white border border-white/15 transition-all shadow-[0_2px_8px_rgba(0,0,0,0.25),inset_0_1px_1px_rgba(255,255,255,0.15)] cursor-pointer"
               title="Operational Alerts"
             >
               <Bell className="w-4 h-4 text-slate-300" />

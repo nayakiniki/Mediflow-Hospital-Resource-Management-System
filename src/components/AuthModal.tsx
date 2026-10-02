@@ -62,7 +62,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [regRole, setRegRole] = useState<HospitalUserRole>('doctor');
   const [regDepartment, setRegDepartment] = useState('Critical Care / ICU');
   const [regLicense, setRegLicense] = useState('');
-  const [agreeTerms, setAgreeTerms] = useState(true);
+  const [agreePolicies, setAgreePolicies] = useState(false);
 
   if (!isOpen) return null;
 
@@ -118,6 +118,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
     if (regPassword.length < 6) {
       setError('Password must contain at least 6 characters.');
+      return;
+    }
+
+    if (!agreePolicies) {
+      setError('Please agree to the privacy policies and guidelines.');
       return;
     }
 
@@ -412,19 +417,20 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             <div className="flex items-center gap-2 pt-1 text-[11px] text-slate-300">
               <input
                 type="checkbox"
-                id="terms"
-                checked={agreeTerms}
-                onChange={(e) => setAgreeTerms(e.target.checked)}
-                className="rounded border-[#274633] bg-[#183124] text-[#E88F89] focus:ring-0"
+                id="agreePolicies"
+                checked={agreePolicies}
+                onChange={(e) => setAgreePolicies(e.target.checked)}
+                className="rounded border-[#274633] bg-[#183124] text-[#E88F89] focus:ring-0 cursor-pointer"
+                required
               />
-              <label htmlFor="terms">
-                I agree to HIPAA zero-trust protocol & audit guidelines.
+              <label htmlFor="agreePolicies" className="cursor-pointer select-none">
+                I agree to privacy policies and guidelines
               </label>
             </div>
 
             <button
               type="submit"
-              disabled={loading || !agreeTerms}
+              disabled={loading || !agreePolicies}
               className="w-full mt-2 py-3 rounded-xl bg-[#E88F89] hover:bg-[#F2A39F] text-slate-950 font-bold text-xs transition-all shadow-md shadow-[#E88F89]/20 flex items-center justify-center gap-2 active:scale-98 disabled:opacity-50 cursor-pointer"
             >
               {loading ? (
@@ -449,12 +455,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           </div>
         </div>
 
-        {/* Google Single Sign-On Button */}
+        {/* Google Sign-In Button */}
         <button
           type="button"
           onClick={handleGoogleSignInClick}
           disabled={loading}
-          className="w-full flex items-center justify-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#183124] hover:bg-[#1E3B2A] border border-[#274633] text-white text-xs font-semibold transition-all hover:scale-101 active:scale-98"
+          className="w-full flex items-center justify-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#183124] hover:bg-[#1E3B2A] border border-[#274633] text-white text-xs font-semibold transition-all hover:scale-101 active:scale-98 cursor-pointer"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24">
             <path
@@ -474,7 +480,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
             />
           </svg>
-          <span>Hospital Google SSO</span>
+          <span>Sign in with Google</span>
         </button>
 
         {/* 1-Click Demo Profiles for Rapid Testing */}
@@ -485,29 +491,29 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           <div className="grid grid-cols-3 gap-2">
             <button
               type="button"
-              onClick={() => quickDemoLogin('doctor', 'Dr. Jennifer Thorne, MD', 'Critical Care / ICU')}
-              className="p-2 rounded-xl bg-[#0E1D15] hover:bg-[#183124] border border-[#1E3728] text-center transition-colors"
+              onClick={() => quickDemoLogin('doctor', 'Dr. Ananya Sen, MD (AIIMS)', 'Critical Care / MICU')}
+              className="p-2 rounded-xl bg-[#0E1D15] hover:bg-[#183124] border border-[#1E3728] text-center transition-colors cursor-pointer"
             >
-              <span className="text-[10px] font-bold text-white block">Doctor</span>
-              <span className="text-[9px] font-mono text-emerald-400">Dr. Thorne</span>
+              <span className="text-[10px] font-bold text-white block">Intensivist</span>
+              <span className="text-[9px] font-mono text-emerald-400">Dr. A. Sen</span>
             </button>
 
             <button
               type="button"
-              onClick={() => quickDemoLogin('administrator', 'Sarah Jenkins, FACHE', 'Operations Administration')}
-              className="p-2 rounded-xl bg-[#0E1D15] hover:bg-[#183124] border border-[#1E3728] text-center transition-colors"
+              onClick={() => quickDemoLogin('administrator', 'Rajesh Sharma', 'NABH Operations Administration')}
+              className="p-2 rounded-xl bg-[#0E1D15] hover:bg-[#183124] border border-[#1E3728] text-center transition-colors cursor-pointer"
             >
               <span className="text-[10px] font-bold text-white block">Admin</span>
-              <span className="text-[9px] font-mono text-amber-400">S. Jenkins</span>
+              <span className="text-[9px] font-mono text-amber-400">R. Sharma</span>
             </button>
 
             <button
               type="button"
-              onClick={() => quickDemoLogin('operations_manager', 'David Rostova', 'Bed Logistics')}
-              className="p-2 rounded-xl bg-[#0E1D15] hover:bg-[#183124] border border-[#1E3728] text-center transition-colors"
+              onClick={() => quickDemoLogin('operations_manager', 'Sister Marykutty Kurian', 'Casualty & Bed Management')}
+              className="p-2 rounded-xl bg-[#0E1D15] hover:bg-[#183124] border border-[#1E3728] text-center transition-colors cursor-pointer"
             >
               <span className="text-[10px] font-bold text-white block">Bed Mgr</span>
-              <span className="text-[9px] font-mono text-cyan-400">D. Rostova</span>
+              <span className="text-[9px] font-mono text-cyan-400">Sr. Marykutty</span>
             </button>
           </div>
         </div>

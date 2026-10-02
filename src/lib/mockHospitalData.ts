@@ -23,42 +23,42 @@ export const INITIAL_METRICS: HospitalMetrics = {
 export const INITIAL_ALERTS: OperationalAlert[] = [
   {
     id: 'alt-1',
-    title: 'ICU capacity nearing threshold',
+    title: 'ICU / MICU capacity nearing threshold',
     category: 'ICU',
     severity: 'Critical',
     timeAgo: '2 min ago',
     timestamp: '09:40 AM',
-    actionRequired: 'Prepare 6 surge beds in Ward 4B',
+    actionRequired: 'Prepare 6 step-down HDU surge beds in Ward 4B (NABH surge protocol)',
     resolved: false
   },
   {
     id: 'alt-2',
-    title: 'Emergency wait time increased',
+    title: 'Casualty / Emergency wait time elevated',
     category: 'Emergency',
     severity: 'Warning',
     timeAgo: '5 min ago',
     timestamp: '09:37 AM',
-    actionRequired: 'Reassign 2 triage resident physicians',
+    actionRequired: 'Reassign 2 Senior Resident (SR) triage physicians to Yellow Triage Bay',
     resolved: false
   },
   {
     id: 'alt-3',
-    title: 'Oxygen inventory approaching limit',
+    title: 'Liquid Medical Oxygen (LMO) tank buffer check',
     category: 'Inventory',
     severity: 'Warning',
     timeAgo: '17 min ago',
     timestamp: '09:25 AM',
-    actionRequired: 'Authorize secondary manifold liquid oxygen fill',
+    actionRequired: 'Authorize secondary manifold cryogenic tank replenishment (PESO protocol)',
     resolved: false
   },
   {
     id: 'alt-4',
-    title: 'Telemetry battery maintenance scheduled',
+    title: 'Biomedical engineering telemetry calibration',
     category: 'Staffing',
     severity: 'Info',
     timeAgo: '45 min ago',
     timestamp: '08:57 AM',
-    actionRequired: 'Routine swap on telemetry units #12-#18',
+    actionRequired: 'Routine NABH preventive maintenance on multi-para monitors #12-#18',
     resolved: true
   }
 ];
@@ -66,7 +66,7 @@ export const INITIAL_ALERTS: OperationalAlert[] = [
 export const INITIAL_PATIENTS: Patient[] = [
   {
     id: 'P-1024',
-    name: 'Robert Hastings',
+    name: 'Ramesh Sharma',
     age: 67,
     gender: 'Male',
     severity: 94,
@@ -74,12 +74,12 @@ export const INITIAL_PATIENTS: Patient[] = [
     waitTime: '42 min',
     status: 'Critical',
     bed: 'ICU-04',
-    department: 'Critical Care / Trauma',
-    chiefComplaint: 'Acute respiratory distress with suspected refractory sepsis and hemodynamic instability',
+    department: 'Critical Care / MICU',
+    chiefComplaint: 'Severe Dengue with plasma leakage, profound thrombocytopenia (platelets 18,000/μL), and refractory septic shock',
     oxygenSat: { value: '88% on ambient air', level: 'Low', risk: 'High' },
     heartRate: { value: '118 bpm (sinus tachycardia)', level: 'Elevated' },
     sepsisIndicator: 'High',
-    aiRecommendation: 'Immediate clinical assessment recommended.',
+    aiRecommendation: 'Initiate protocolized IV fluid resuscitation (WHO/NVBDCP guidelines), central venous line insertion, and blood component reservation.',
     admittedAt: '08:58 AM',
     lastUpdated: '2 minutes ago',
     flaggedForReview: true,
@@ -89,146 +89,146 @@ export const INITIAL_PATIENTS: Patient[] = [
       waitTime: 18,
       age: 9,
       other: 5,
-      summary: 'High severity, prolonged waiting time, and abnormal oxygen saturation contributed most to the current priority score.'
+      summary: 'Severe hemodynamic collapse, prolonged Casualty triage wait time, and hypoxia contributed most to current priority score (ABHA: 91-8472-1024-5821).'
     },
     notes: [
       {
         id: 'n-1',
-        author: 'RN J. Miller',
-        role: 'Triage Nurse',
+        author: 'Sister Marykutty Kurian',
+        role: 'Triage Nursing Officer',
         time: '09:31 AM',
-        text: 'Patient expressing severe dyspnea and diaphoresis. Supplemental high-flow nasal cannula placed. Intensivist paged.'
+        text: 'Patient displaying cold clammy extremities, feeble thready pulse. High-flow oxygen started via non-rebreather mask. Intensivist and blood bank alerted for RDP/SDP.'
       },
       {
         id: 'n-2',
-        author: 'Dr. Jennifer Thorne, MD',
-        role: 'Attending Intensivist',
+        author: 'Dr. Ananya Sen, MD (AIIMS)',
+        role: 'Chief Intensivist & Critical Care Lead',
         time: '08:45 AM',
-        text: 'qSOFA score = 3. Arterial lactate elevated at 4.2 mmol/L. Bedside echocardiogram shows hyperdynamic left ventricle.'
+        text: 'qSOFA score = 3. Arterial lactate elevated at 4.2 mmol/L. Bedside echocardiogram reveals IVC collapsibility < 30%. Initiated noradrenaline infusion titration.'
       }
     ],
     timeline: [
       {
         id: 't-1',
         time: '09:42 AM',
-        title: 'Vitals updated',
-        description: 'SpO2 drops to 88% ambient; HR elevated to 118 bpm. Triage severity flagged at 94.',
-        author: 'Telemetry Monitor System',
+        title: 'Telemetry vitals synchronized',
+        description: 'SpO2 88% ambient; HR elevated to 118 bpm; BP 84/56 mmHg. AI triage urgency re-scored to 94 (Critical).',
+        author: 'Central Telemetry Monitor (BPL Elite)',
         category: 'vitals'
       },
       {
         id: 't-2',
         time: '09:31 AM',
-        title: 'Nurse note added',
-        description: 'RN J. Miller documented severe dyspnea; titrated high-flow cannula.',
-        author: 'RN J. Miller',
+        title: 'Clinical triage note recorded',
+        description: 'Sister Marykutty Kurian titrated non-rebreather mask to 10 L/min and sent stat Dengue NS1 & complete hemogram.',
+        author: 'Sister Marykutty Kurian',
         category: 'note'
       },
       {
         id: 't-3',
         time: '09:10 AM',
-        title: 'Patient moved to ICU-04',
-        description: 'Transferred from ED Resuscitation Bay 1 to Critical Care ICU-04.',
-        author: 'Operations Bed Dispatch',
+        title: 'Bed allocated to MICU-04',
+        description: 'Transferred from Casualty Red Bay to Intensive Care Unit Bed ICU-04.',
+        author: 'Bed Dispatch / NABH Operations',
         category: 'transfer'
       },
       {
         id: 't-4',
         time: '08:45 AM',
-        title: 'Physician assessment',
-        description: 'Dr. Jennifer Thorne conducted initial critical evaluation and ordered stat ABG.',
-        author: 'Dr. Jennifer Thorne, MD',
+        title: 'Attending physician evaluation',
+        description: 'Dr. Ananya Sen, MD evaluated septic shock parameters and initiated central arterial line placement.',
+        author: 'Dr. Ananya Sen, MD (AIIMS)',
         category: 'assessment'
       },
       {
         id: 't-5',
         time: '08:12 AM',
-        title: 'Patient admitted',
-        description: 'Direct arrival via EMS paramedic unit with respiratory failure alert.',
-        author: 'ED Intake Desk',
+        title: 'Admitted via Emergency Casualty',
+        description: 'Direct 108 Emergency Ambulance transfer with acute respiratory distress and severe petechial purpura.',
+        author: 'Casualty Reception Desk',
         category: 'admission'
       }
     ]
   },
   {
     id: 'P-1098',
-    name: 'Elena Rostova',
-    age: 54,
+    name: 'Rajeshwari Rao',
+    age: 42,
     gender: 'Female',
-    severity: 88,
+    severity: 89,
     risk: 91,
     waitTime: '31 min',
     status: 'Critical',
-    bed: 'ED-Resus 02',
-    department: 'Emergency / Cardiology',
-    chiefComplaint: 'Crushing substernal chest pressure, troponin elevation with ST depression in V4-V6',
-    oxygenSat: { value: '92% on 2L nasal cannula', level: 'Low', risk: 'High' },
-    heartRate: { value: '104 bpm', level: 'Elevated' },
+    bed: 'ICU-08',
+    department: 'Intensive Coronary Care (ICCU)',
+    chiefComplaint: 'Acute anterior wall myocardial infarction (STEMI) with ventricular ectopics and cardiogenic pre-shock',
+    oxygenSat: { value: '91% on nasal prongs', level: 'Low', risk: 'High' },
+    heartRate: { value: '110 bpm', level: 'Elevated' },
     sepsisIndicator: 'Low',
-    aiRecommendation: 'Urgent cardiac catheterization consult and anticoagulation review.',
-    admittedAt: '09:11 AM',
+    aiRecommendation: 'Expedite primary percutaneous coronary intervention (PCI) within the 90-minute door-to-balloon window.',
+    admittedAt: '09:04 AM',
     lastUpdated: '5 minutes ago',
-    flaggedForReview: false,
+    flaggedForReview: true,
     factorBreakdown: {
-      severity: 38,
+      severity: 45,
       oxygen: 22,
       waitTime: 20,
-      age: 12,
-      other: 8,
-      summary: 'Troponin biomarker elevation, ischemic ECG findings, and tachycardia drive priority rating.'
+      age: 8,
+      other: 5,
+      summary: 'ST-segment elevations across leads V1-V4 and cardiogenic hypotension dictate emergency catheterization.'
     },
     notes: [
       {
         id: 'n-3',
-        author: 'Dr. Marcus Vance, MD',
-        role: 'ED Attending',
+        author: 'Dr. Sneha Kulkarni, MD, DM',
+        role: 'Consultant Interventional Cardiologist',
         time: '09:20 AM',
-        text: 'Initial 12-lead ECG confirmed 1.5mm ST depression anterolateral. Aspirin and Heparin drip protocol started.'
+        text: 'ECG shows 4mm ST elevations V1-V4 with reciprocal depressions. Loading dose of Aspirin 325mg and Ticagrelor 180mg administered. Cath Lab team activated.'
       }
     ],
     timeline: [
       {
         id: 't-6',
-        time: '09:37 AM',
-        title: 'Troponin-I Level Resulted',
-        description: 'Laboratory reported peak troponin of 2.14 ng/mL.',
-        author: 'Core Lab System',
-        category: 'vitals'
+        time: '09:35 AM',
+        title: 'Cath Lab transit cleared',
+        description: 'Primary PCI scheduled in Cath Lab 2 with Dr. Sneha Kulkarni. Consent recorded on ABDM portal.',
+        author: 'ICCU Coordinator',
+        category: 'order'
       },
       {
         id: 't-7',
         time: '09:20 AM',
-        title: 'Cardiology consult requested',
-        description: 'Urgent cath lab activation requested for acute coronary syndrome.',
-        author: 'Dr. Marcus Vance, MD',
-        category: 'order'
+        title: 'Cardiology consult completed',
+        description: 'Stat 12-lead ECG confirmed anterior STEMI; dual antiplatelet therapy loaded.',
+        author: 'Dr. Sneha Kulkarni, MD, DM',
+        category: 'assessment'
       },
       {
         id: 't-8',
-        time: '09:11 AM',
-        title: 'Patient admitted to ED',
-        description: 'Triage walk-in with sudden crushing chest tightness radiating to left arm.',
-        author: 'Triage Desk',
+        time: '09:04 AM',
+        title: 'Admitted to Casualty triage',
+        description: 'Walk-in arrival with severe retrosternal chest pain radiating to left arm and jaw.',
+        author: 'Casualty Triage Desk',
         category: 'admission'
       }
     ]
   },
   {
     id: 'P-1045',
-    name: 'David Vance',
+    name: 'Aarav Mehta',
     age: 72,
     gender: 'Male',
     severity: 82,
     risk: 87,
     waitTime: '25 min',
     status: 'High',
-    bed: 'StepDown-12',
-    department: 'Pulmonology',
-    chiefComplaint: 'Exacerbation of chronic obstructive pulmonary disease with hypercapnia',
+    bed: 'HDU-12',
+    department: 'Pulmonology & Respiratory Care',
+    chiefComplaint: 'Acute exacerbation of chronic obstructive pulmonary disease (COPD) with Type-II hypercapnic respiratory failure',
     oxygenSat: { value: '90% on BiPAP', level: 'Low', risk: 'High' },
     heartRate: { value: '96 bpm', level: 'Normal' },
     sepsisIndicator: 'Moderate',
-    aiRecommendation: 'Serial arterial blood gas analysis and bronchodilator titration.',
+    aiRecommendation: 'Serial arterial blood gas (ABG) analysis, nebulized bronchodilators, and systemic corticosteroid administration.',
     admittedAt: '09:17 AM',
     lastUpdated: '12 minutes ago',
     flaggedForReview: false,
@@ -238,30 +238,30 @@ export const INITIAL_PATIENTS: Patient[] = [
       waitTime: 15,
       age: 15,
       other: 5,
-      summary: 'Chronic respiratory compromise compounded by low baseline saturation and advanced age.'
+      summary: 'Chronic respiratory compromise compounded by high PaCO2 (62 mmHg) and advanced age.'
     },
     timeline: [
       {
         id: 't-9',
         time: '09:30 AM',
-        title: 'BiPAP Settings adjusted',
-        description: 'IPAP increased to 14 cmH2O; EPAP maintained at 6 cmH2O.',
-        author: 'Respiratory Therapist K. Adams',
+        title: 'NIV BiPAP settings titrated',
+        description: 'IPAP set to 14 cmH2O, EPAP to 6 cmH2O on Respironics V60; FiO2 maintained at 35%.',
+        author: 'Respiratory Therapist K. Nair',
         category: 'vitals'
       },
       {
         id: 't-10',
         time: '09:17 AM',
-        title: 'Patient admitted to StepDown',
-        description: 'Direct admission from outpatient clinic referral.',
-        author: 'Intake Coordinator',
+        title: 'Admitted to High Dependency Unit (HDU)',
+        description: 'Step-up admission from Chest Clinic referral.',
+        author: 'Pulmonology Registrar',
         category: 'admission'
       }
     ]
   },
   {
     id: 'P-1011',
-    name: 'Sophia Martinez',
+    name: 'Sunita Patel',
     age: 38,
     gender: 'Female',
     severity: 76,
@@ -269,50 +269,50 @@ export const INITIAL_PATIENTS: Patient[] = [
     waitTime: '19 min',
     status: 'High',
     bed: 'ED-08',
-    department: 'Emergency',
-    chiefComplaint: 'Acute onset severe right lower quadrant pain with peritoneal signs',
+    department: 'Casualty / Emergency',
+    chiefComplaint: 'Acute calculous cholecystitis with Murphy’s sign positive and localized guarding in right hypochondrium',
     oxygenSat: { value: '98% room air', level: 'Normal', risk: 'Normal' },
     heartRate: { value: '102 bpm', level: 'Elevated' },
     sepsisIndicator: 'Moderate',
-    aiRecommendation: 'Expedite abdominal CT angiography and general surgical evaluation.',
+    aiRecommendation: 'Urgent ultrasound abdomen, IV third-generation cephalosporin, and surgical clearance for laparoscopic cholecystectomy.',
     admittedAt: '09:23 AM',
     flaggedForReview: false
   },
   {
     id: 'P-1056',
-    name: 'Arthur Pendelton',
-    age: 81,
+    name: 'Vikram Singh',
+    age: 54,
     gender: 'Male',
     severity: 71,
     risk: 73,
     waitTime: '16 min',
     status: 'High',
     bed: 'Cardio-06',
-    department: 'Cardiology',
-    chiefComplaint: 'Decompensated congestive heart failure with bilateral pitting edema',
+    department: 'Cardiology & HDU',
+    chiefComplaint: 'Decompensated dilated cardiomyopathy with acute congestive cardiac failure and bilateral pedal edema',
     oxygenSat: { value: '93% room air', level: 'Low', risk: 'Normal' },
     heartRate: { value: '84 bpm', level: 'Normal' },
     sepsisIndicator: 'Low',
-    aiRecommendation: 'IV diuretic challenge and serial weight/electrolyte tracking.',
+    aiRecommendation: 'IV loop diuretic challenge (Furosemide 40mg stat), strict fluid balance chart, and serial serum creatinine monitoring.',
     admittedAt: '09:26 AM',
     flaggedForReview: false
   },
   {
     id: 'P-1082',
-    name: 'Claire Dupont',
+    name: 'Priya Nair',
     age: 29,
     gender: 'Female',
     severity: 45,
     risk: 42,
     waitTime: '12 min',
     status: 'Stable',
-    bed: 'GenMed-14',
-    department: 'Internal Medicine',
-    chiefComplaint: 'Pyelonephritis responding favorably to initial IV cephalosporin regimen',
+    bed: 'GEN-302',
+    department: 'General Medicine',
+    chiefComplaint: 'Complicated urinary tract infection (Pyelonephritis) showing clinical resolution with IV Ceftriaxone',
     oxygenSat: { value: '99% room air', level: 'Normal', risk: 'Normal' },
     heartRate: { value: '74 bpm', level: 'Normal' },
     sepsisIndicator: 'Low',
-    aiRecommendation: 'Routine transition to oral antibiotics after 24-hour afebrile window.',
+    aiRecommendation: 'Transition to oral Cefixime 200mg BD following 24 hours of afebrile period; discharge planned tomorrow.',
     admittedAt: '09:30 AM',
     flaggedForReview: false
   }
@@ -326,225 +326,225 @@ export const INITIAL_BEDS: BedAllocation[] = [
 ];
 
 export const INITIAL_STAFF: StaffOnDuty[] = [
-  { department: 'Intensive Care Unit (ICU)', doctors: 8, nurses: 24, coveragePercent: 92, leadOnCall: 'Dr. Jennifer Thorne, MD' },
-  { department: 'Emergency Medicine', doctors: 14, nurses: 38, coveragePercent: 88, leadOnCall: 'Dr. Marcus Vance, MD' },
-  { department: 'Cardiology & Telemetry', doctors: 6, nurses: 16, coveragePercent: 84, leadOnCall: 'Dr. Elena Kim, MD' },
-  { department: 'General Surgery & Trauma', doctors: 8, nurses: 18, coveragePercent: 86, leadOnCall: 'Dr. Carlos Mendoza, MD' },
-  { department: 'Pulmonology & Respiratory', doctors: 6, nurses: 14, coveragePercent: 80, leadOnCall: 'Dr. Sarah Lin, MD' }
+  { department: 'Intensive Care Unit (ICU / MICU)', doctors: 8, nurses: 24, coveragePercent: 92, leadOnCall: 'Dr. Ananya Sen, MD (AIIMS)' },
+  { department: 'Casualty & Emergency Medicine', doctors: 14, nurses: 38, coveragePercent: 88, leadOnCall: 'Dr. Amit Patel, MD' },
+  { department: 'Cardiology & ICCU', doctors: 6, nurses: 16, coveragePercent: 84, leadOnCall: 'Dr. Sneha Kulkarni, MD, DM' },
+  { department: 'General Surgery & Trauma OT', doctors: 8, nurses: 18, coveragePercent: 86, leadOnCall: 'Dr. Rajesh Mukherjee, MS, MCh' },
+  { department: 'Pulmonology & Respiratory Care', doctors: 6, nurses: 14, coveragePercent: 80, leadOnCall: 'Dr. Arvind Swaminathan, MD' }
 ];
 
 export const INITIAL_BED_ITEMS: BedItem[] = [
   {
-    id: 'ICU-204',
+    id: 'MICU-204',
     ward: 'ICU',
-    floor: '2nd Floor - Critical Wing',
+    floor: '2nd Floor - Critical Care Block',
     type: 'Intensive Care',
     status: 'Available',
     hasVentilator: true,
     hasIsolation: true,
     genderWard: 'Any',
-    specialEquipment: ['Mechanical Ventilator', 'Arterial Line Monitor', 'Crash Cart Station'],
+    specialEquipment: ['Hamilton-C3 Mechanical Ventilator', 'Arterial Line Monitor', 'Crash Cart Station'],
     lastCleaned: '10 min ago'
   },
   {
-    id: 'ICU-205',
+    id: 'MICU-205',
     ward: 'ICU',
-    floor: '2nd Floor - Critical Wing',
+    floor: '2nd Floor - Critical Care Block',
     type: 'Intensive Care',
     status: 'Occupied',
     hasVentilator: true,
     hasIsolation: false,
     genderWard: 'Any',
-    specialEquipment: ['Ventilator', 'Dialysis Port'],
+    specialEquipment: ['Dräger Evita Ventilator', 'Fresenius CRRT Dialysis Port'],
     assignedPatientId: 'P-1024',
-    assignedPatientName: 'Robert Hastings'
+    assignedPatientName: 'Ramesh Sharma (ABHA-91-8472-1024)'
   },
   {
-    id: 'ICU-206',
+    id: 'MICU-206',
     ward: 'ICU',
-    floor: '2nd Floor - Critical Wing',
+    floor: '2nd Floor - Critical Care Block',
     type: 'Negative Pressure',
     status: 'Cleaning',
     hasVentilator: true,
     hasIsolation: true,
     genderWard: 'Any',
-    specialEquipment: ['HEPA Filter', 'Ventilator'],
-    lastCleaned: 'Cleaning in progress (ETA 15 min)'
+    specialEquipment: ['HEPA Airborne Isolation Filter', 'Maquet Servo-I Ventilator'],
+    lastCleaned: 'Sanitization in progress (NABH protocol ETA 15 min)'
   },
   {
-    id: 'ICU-207',
+    id: 'MICU-207',
     ward: 'ICU',
-    floor: '2nd Floor - Critical Wing',
+    floor: '2nd Floor - Critical Care Block',
     type: 'Intensive Care',
     status: 'Reserved',
     hasVentilator: true,
     hasIsolation: false,
     genderWard: 'Any',
-    specialEquipment: ['Ventilator', 'ECMO Hookup'],
-    assignedPatientName: 'Reserved for OR Post-Op'
+    specialEquipment: ['Ventilator', 'ECMO Hookup Station'],
+    assignedPatientName: 'Reserved for Post-CABG recovery'
   },
   {
-    id: 'ED-018',
+    id: 'CAS-018',
     ward: 'Emergency',
-    floor: 'Ground Floor - Rapid Triage',
+    floor: 'Ground Floor - Casualty & Trauma Bay',
     type: 'Trauma Resus',
     status: 'Occupied',
     hasVentilator: true,
     hasIsolation: false,
     genderWard: 'Any',
-    specialEquipment: ['Point-of-Care Ultrasound', 'Rapid Infuser'],
+    specialEquipment: ['Sonosite Point-of-Care Ultrasound (POCUS)', 'Belmont Rapid Infuser'],
     assignedPatientId: 'P-1098',
-    assignedPatientName: 'Elena Rostova'
+    assignedPatientName: 'Rajeshwari Rao'
   },
   {
-    id: 'ED-019',
+    id: 'CAS-019',
     ward: 'Emergency',
-    floor: 'Ground Floor - Rapid Triage',
+    floor: 'Ground Floor - Casualty & Trauma Bay',
     type: 'Standard Acute',
     status: 'Available',
     hasVentilator: false,
     hasIsolation: false,
     genderWard: 'Any',
-    specialEquipment: ['Telemetry Hub'],
+    specialEquipment: ['BPL Multi-para Monitor Hub'],
     lastCleaned: '25 min ago'
   },
   {
-    id: 'ED-020',
+    id: 'CAS-020',
     ward: 'Emergency',
-    floor: 'Ground Floor - Rapid Triage',
+    floor: 'Ground Floor - Casualty & Trauma Bay',
     type: 'Negative Pressure',
     status: 'Available',
     hasVentilator: true,
     hasIsolation: true,
     genderWard: 'Any',
-    specialEquipment: ['Airborne Isolation System', 'Portable Suction'],
+    specialEquipment: ['Airborne Infection Isolation Room (AIIR)', 'Portable Vacuum Suction'],
     lastCleaned: '5 min ago'
   },
   {
-    id: 'GEN-302',
+    id: 'HDU-302',
     ward: 'General Ward',
-    floor: '3rd Floor - Inpatient Med-Surg',
+    floor: '3rd Floor - Inpatient Med-Surg & HDU',
     type: 'Standard Acute',
     status: 'Occupied',
     hasVentilator: false,
     hasIsolation: false,
     genderWard: 'Male',
-    specialEquipment: ['IV Pump Rack', 'Bariatric Lift'],
-    assignedPatientName: 'Arthur Pendelton'
+    specialEquipment: ['Infusion Syringe Pump Rack', 'Bariatric Motor Bed'],
+    assignedPatientName: 'Vikram Singh'
   },
   {
     id: 'GEN-303',
     ward: 'General Ward',
-    floor: '3rd Floor - Inpatient Med-Surg',
+    floor: '3rd Floor - Female Medical Ward',
     type: 'Standard Acute',
     status: 'Available',
     hasVentilator: false,
     hasIsolation: false,
     genderWard: 'Female',
-    specialEquipment: ['Telemetry Pack'],
+    specialEquipment: ['Central Wall Oxygen Hub'],
     lastCleaned: '30 min ago'
   },
   {
-    id: 'GEN-304',
+    id: 'HDU-304',
     ward: 'General Ward',
-    floor: '3rd Floor - Inpatient Med-Surg',
+    floor: '3rd Floor - High Dependency Unit (HDU)',
     type: 'Step-Down',
     status: 'Maintenance',
     hasVentilator: false,
     hasIsolation: false,
     genderWard: 'Any',
-    specialEquipment: ['Bed Motor Sensor'],
-    maintenanceNote: 'Hydraulic lift motor inspection in progress'
+    specialEquipment: ['Bed Motor Sensor Hub'],
+    maintenanceNote: 'Biomedical engineering hydraulic motor inspection in progress'
   },
   {
     id: 'SURG-401',
     ward: 'Surgical',
-    floor: '4th Floor - Post-Operative Recovery',
+    floor: '4th Floor - Post-Operative Surgical Recovery (PACU)',
     type: 'Intensive Care',
     status: 'Available',
     hasVentilator: true,
     hasIsolation: false,
     genderWard: 'Any',
-    specialEquipment: ['Continuous Anesthesia Monitor', 'Warming Blanket'],
+    specialEquipment: ['Mindray Continuous Anesthesia Monitor', 'Bair Hugger Patient Warming System'],
     lastCleaned: '40 min ago'
   },
   {
     id: 'SURG-402',
     ward: 'Surgical',
-    floor: '4th Floor - Post-Operative Recovery',
+    floor: '4th Floor - Post-Operative Surgical Recovery (PACU)',
     type: 'Standard Acute',
     status: 'Blocked',
     hasVentilator: false,
     hasIsolation: true,
     genderWard: 'Any',
-    specialEquipment: ['Negative Pressure Seal'],
-    maintenanceNote: 'Reserved for biohazard containment drill'
+    specialEquipment: ['Negative Pressure Airflow Seal'],
+    maintenanceNote: 'NABH annual decontamination drill'
   }
 ];
 
 export const INITIAL_SHIFTS: DoctorShift[] = [
   {
     id: 's-1',
-    doctorName: 'Dr. Jennifer Thorne, MD',
-    department: 'Intensive Care Unit (ICU)',
+    doctorName: 'Dr. Ananya Sen, MD (AIIMS)',
+    department: 'Intensive Care Unit (ICU / MICU)',
     date: 'Today',
-    shift: '07:00 – 19:00 (Day Critical)',
+    shift: '08:00 – 16:00 (Day Critical Duty)',
     role: 'Lead Intensivist',
     status: 'Active'
   },
   {
     id: 's-2',
-    doctorName: 'Dr. Marcus Vance, MD',
-    department: 'Emergency Medicine',
+    doctorName: 'Dr. Amit Patel, MD',
+    department: 'Casualty & Emergency Medicine',
     date: 'Today',
-    shift: '08:00 – 16:00 (ED Morning)',
-    role: 'Attending Physician',
+    shift: '08:00 – 14:00 (Morning Casualty)',
+    role: 'Casualty Medical Officer (CMO)',
     status: 'Active'
   },
   {
     id: 's-3',
-    doctorName: 'Dr. Amit Patel, MD',
-    department: 'Emergency Medicine',
+    doctorName: 'Dr. Rohan Deshmukh, MD',
+    department: 'Casualty & Emergency Medicine',
     date: 'Today',
-    shift: '14:00 – 22:00 (ED Swing)',
-    role: 'ED Senior Physician',
+    shift: '14:00 – 20:00 (Evening Triage)',
+    role: 'Senior Resident (SR)',
     status: 'Conflict',
-    conflictDescription: 'Assigned to two overlapping shifts: ED Swing (14:00-22:00) & Urgent Care Lead (13:00-19:00)'
+    conflictDescription: 'Double-rostered: Evening Triage (14:00-20:00) & Urgent Fever OPD Lead (13:00-19:00)'
   },
   {
     id: 's-4',
-    doctorName: 'Dr. Elena Kim, MD',
-    department: 'Cardiology & Telemetry',
+    doctorName: 'Dr. Sneha Kulkarni, MD, DM',
+    department: 'Cardiology & ICCU',
     date: 'Today',
-    shift: '09:00 – 17:00 (Cath/Inpatient)',
-    role: 'Cardiology On Call',
+    shift: '09:00 – 17:00 (Cath Lab / ICCU Call)',
+    role: 'Consultant Cardiologist',
     status: 'Active'
   },
   {
     id: 's-5',
-    doctorName: 'Dr. Carlos Mendoza, MD',
-    department: 'General Surgery & Trauma',
+    doctorName: 'Dr. Rajesh Mukherjee, MS, MCh',
+    department: 'General Surgery & Trauma OT',
     date: 'Today',
-    shift: '07:00 – 15:00 (OR Call)',
+    shift: '08:00 – 16:00 (Emergency OT Call)',
     role: 'Trauma Surgeon',
     status: 'Active'
   },
   {
     id: 's-6',
-    doctorName: 'Dr. Sarah Lin, MD',
-    department: 'Pulmonology & Respiratory',
+    doctorName: 'Dr. Arvind Swaminathan, MD',
+    department: 'Pulmonology & Respiratory Care',
     date: 'Today',
-    shift: '08:00 – 18:00 (Consults)',
-    role: 'Pulmonologist',
+    shift: '08:00 – 18:00 (Bronchoscopy / HDU Rounds)',
+    role: 'Consultant Pulmonologist',
     status: 'Active'
   },
   {
     id: 's-7',
-    doctorName: 'Dr. Brian O’Connor, MD',
-    department: 'Emergency Medicine',
+    doctorName: 'Dr. Brian D’Souza, MD',
+    department: 'Casualty & Emergency Medicine',
     date: 'Today',
-    shift: '16:00 – 00:00 (Evening)',
-    role: 'ED Attending',
+    shift: '20:00 – 08:00 (Night Casualty Duty)',
+    role: 'Emergency Physician',
     status: 'Scheduled'
   }
 ];
@@ -552,36 +552,35 @@ export const INITIAL_SHIFTS: DoctorShift[] = [
 export const INITIAL_CONFLICTS: ScheduleConflict[] = [
   {
     id: 'cf-1',
-    doctorName: 'Dr. Amit Patel, MD',
-    department: 'Emergency Medicine',
-    shifts: ['ED Swing (14:00 – 22:00)', 'Urgent Care Lead (13:00 – 19:00)'],
+    doctorName: 'Dr. Rohan Deshmukh, MD',
+    department: 'Casualty & Emergency Medicine',
+    shifts: ['Evening Triage (14:00 – 20:00)', 'Fever OPD Lead (13:00 – 19:00)'],
     conflictType: 'Overlapping Shift',
     severity: 'High',
-    recommendation: 'Reassign Urgent Care Lead to Dr. Brian O’Connor or float Dr. Lin for triage review.'
+    recommendation: 'Reassign Fever OPD to Dr. Brian D’Souza or dispatch on-call pool resident.'
   },
   {
     id: 'cf-2',
-    doctorName: 'Emergency Department',
-    department: 'Emergency Medicine',
-    shifts: ['14:00 – 16:00 Shift Window'],
+    doctorName: 'Casualty & Emergency Triage',
+    department: 'Casualty & Emergency Medicine',
+    shifts: ['14:00 – 16:00 Peak Intake Window'],
     conflictType: 'Under-Coverage',
     severity: 'High',
-    recommendation: 'Current coverage has 3 doctors on duty; minimum configured requirement is 4 doctors.'
+    recommendation: 'NABH minimum required Casualty staffing is 4 doctors; currently only 3 physicians are signed in.'
   }
 ];
 
 export const AVAILABLE_DOCTORS = [
-  { name: 'Dr. Brian O’Connor, MD', department: 'Emergency Medicine', status: 'Available On-Call', contact: 'Ext. 4022' },
-  { name: 'Dr. Maya Hansen, MD', department: 'Critical Care / ICU', status: 'Available Standby', contact: 'Ext. 4038' },
-  { name: 'Dr. Daniel Cho, MD', department: 'Internal Medicine', status: 'Available In-House', contact: 'Ext. 4110' },
-  { name: 'Dr. Lisa Bennett, MD', department: 'General Surgery', status: 'On-Call Home (15m response)', contact: 'Ext. 4209' }
+  { name: 'Dr. Brian D’Souza, MD', department: 'Casualty & Emergency Medicine', status: 'Available On-Call', contact: 'Ext. 4022 / Intercom 108' },
+  { name: 'Dr. Maya Hansen / Dr. Pooja Hegde, MD', department: 'Critical Care / MICU', status: 'Available Standby', contact: 'Ext. 4038' },
+  { name: 'Dr. Daniel Cho / Dr. Tushar Saxena, MD', department: 'Internal Medicine', status: 'Available In-House', contact: 'Ext. 4110' },
+  { name: 'Dr. Lisa Bennett / Dr. Kavita Reddy, MS', department: 'General Surgery', status: 'On-Call Home (15m response)', contact: 'Ext. 4209' }
 ];
 
 export const DAILY_CHANGES = [
-  { label: 'ICU Occupancy', change: '+8%', direction: 'up' as const, isConcerning: true, detail: '87% current (up from 79% yesterday)' },
-  { label: 'Emergency Wait', change: '+12 min', direction: 'up' as const, isConcerning: true, detail: '42 min avg (target threshold: 30 min)' },
-  { label: 'Available Beds', change: '-6 beds', direction: 'down' as const, isConcerning: true, detail: '38 beds hospital-wide (6 ICU beds free)' },
-  { label: 'Critical Patients', change: '+3 patients', direction: 'up' as const, isConcerning: true, detail: '12 active critical vs 9 yesterday' },
-  { label: 'Doctor Coverage', change: '-4%', direction: 'down' as const, isConcerning: false, detail: '86% coverage with 2 shift gaps flagged' }
+  { label: 'MICU / ICU Occupancy', change: '+8%', direction: 'up' as const, isConcerning: true, detail: '87% current (up from 79% yesterday baseline)' },
+  { label: 'Casualty Waiting Time', change: '+12 min', direction: 'up' as const, isConcerning: true, detail: '42 min avg (target NABH benchmark: 30 min)' },
+  { label: 'Available Inpatient Beds', change: '-6 beds', direction: 'down' as const, isConcerning: true, detail: '38 beds hospital-wide (6 ICU beds free)' },
+  { label: 'Critical Triage Patients', change: '+3 patients', direction: 'up' as const, isConcerning: true, detail: '12 active critical vs 9 yesterday' },
+  { label: 'Doctor Coverage Ratio', change: '-4%', direction: 'down' as const, isConcerning: false, detail: '86% coverage with 2 shift gaps flagged in Casualty' }
 ];
-

@@ -191,19 +191,14 @@ export const MediFlowHero: React.FC<MediFlowHeroProps> = ({
         {/* Right Auth Portal Actions */}
         <div className="flex items-center gap-2.5">
           {user ? (
-            <div className="flex items-center gap-2 bg-white/45 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/50 shadow-xs">
+            <div className="flex items-center gap-2.5 bg-white/50 backdrop-blur-xl px-4 py-1.5 rounded-full border border-white/70 shadow-[0_4px_16px_rgba(0,0,0,0.08),inset_0_1px_1px_rgba(255,255,255,0.85)]">
               <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
-              <div className="text-left hidden sm:block">
-                <span className="text-xs font-bold text-slate-900 block leading-tight truncate max-w-[130px]">
-                  {user.displayName || user.email}
-                </span>
-                <span className="text-[10px] text-emerald-800 font-mono block">
-                  {user.role ? String(user.role).replace('_', ' ') : 'Clinician'}
-                </span>
-              </div>
+              <span className="text-xs font-semibold text-slate-800 hidden sm:inline font-mono">
+                Staff Verified
+              </span>
               <button
                 onClick={onExploreDashboard}
-                className="px-3 py-1 rounded-full text-xs font-bold text-white bg-[#7D0C0C] hover:bg-[#921414] transition-all shadow-xs cursor-pointer"
+                className="px-3.5 py-1 rounded-full text-xs font-bold text-white bg-[#7D0C0C] hover:bg-[#921414] transition-all shadow-[0_2px_8px_rgba(125,12,12,0.4),inset_0_1px_1px_rgba(255,255,255,0.4)] cursor-pointer glossy-button"
               >
                 Command Center →
               </button>
@@ -212,20 +207,20 @@ export const MediFlowHero: React.FC<MediFlowHeroProps> = ({
             <div className="flex items-center gap-2">
               <button
                 onClick={() => onOpenAuth && onOpenAuth('login')}
-                className="px-4 py-1.5 rounded-full text-xs font-semibold text-[#550E0E] bg-white/50 hover:bg-white/80 border border-white/60 transition-all shadow-xs cursor-pointer"
+                className="px-4 py-1.5 rounded-full text-xs font-semibold text-[#550E0E] bg-white/60 hover:bg-white/90 border border-white/80 transition-all shadow-[0_2px_8px_rgba(0,0,0,0.06),inset_0_1px_1px_rgba(255,255,255,0.85)] cursor-pointer"
               >
                 Sign In
               </button>
               <button
                 onClick={() => onOpenAuth && onOpenAuth('register')}
-                className="px-4 py-1.5 rounded-full text-xs font-semibold text-[#550E0E] transition-all transform hover:scale-102 cursor-pointer"
+                className="px-4 py-1.5 rounded-full text-xs font-semibold text-[#550E0E] transition-all transform hover:scale-102 cursor-pointer glossy-button"
                 style={{
                   background: 'linear-gradient(180deg, #EAA6A0 0%, #E3958F 48%, #D4847E 100%)',
-                  boxShadow: '0 2px 8px rgba(70, 15, 15, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.45)',
-                  border: '1px solid rgba(255, 255, 255, 0.3)'
+                  boxShadow: '0 4px 14px rgba(70, 15, 15, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.65)',
+                  border: '1px solid rgba(255, 255, 255, 0.45)'
                 }}
               >
-                Register Clinician
+                Register Staff
               </button>
             </div>
           )}
@@ -447,18 +442,18 @@ export const MediFlowHero: React.FC<MediFlowHeroProps> = ({
           Hospital command center
         </p>
 
-        {/* CTA Buttons: Pill shape in soft coral/salmon gradient matching image.png */}
+        {/* CTA Buttons: Pill shape in soft coral/salmon gradient with specular gloss highlight */}
         <div className="mt-8 sm:mt-10 flex flex-row items-center justify-center gap-5 sm:gap-7 flex-wrap">
           {/* Button 1: Explore Dashboard → */}
           <button
             onClick={onExploreDashboard}
-            className="px-7 sm:px-9 py-3 sm:py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 transform hover:scale-103 active:scale-98 flex items-center justify-center gap-2 cursor-pointer"
+            className="px-7 sm:px-9 py-3 sm:py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 transform hover:scale-103 active:scale-98 flex items-center justify-center gap-2 cursor-pointer glossy-button"
             style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               background: 'linear-gradient(180deg, #E69D97 0%, #E08E88 45%, #CB7973 100%)',
               color: '#520C0C',
-              boxShadow: '0 12px 28px -4px rgba(45, 12, 12, 0.45), 0 4px 10px rgba(0, 0, 0, 0.22), inset 0 1px 1.5px rgba(255, 255, 255, 0.7)',
-              border: '1px solid rgba(255, 255, 255, 0.45)'
+              boxShadow: '0 14px 32px -4px rgba(45, 12, 12, 0.45), 0 4px 12px rgba(0, 0, 0, 0.22), inset 0 1px 2px rgba(255, 255, 255, 0.85)',
+              border: '1px solid rgba(255, 255, 255, 0.55)'
             }}
           >
             <span>Explore Dashboard</span>
@@ -468,21 +463,21 @@ export const MediFlowHero: React.FC<MediFlowHeroProps> = ({
           {/* Button 2: See How It Works */}
           <button
             onClick={scrollToHowItWorks}
-            className="px-7 sm:px-9 py-3 sm:py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 transform hover:scale-103 active:scale-98 flex items-center justify-center cursor-pointer"
+            className="px-7 sm:px-9 py-3 sm:py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 transform hover:scale-103 active:scale-98 flex items-center justify-center cursor-pointer glossy-button"
             style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               background: 'linear-gradient(180deg, #E69D97 0%, #E08E88 45%, #CB7973 100%)',
               color: '#520C0C',
-              boxShadow: '0 12px 28px -4px rgba(45, 12, 12, 0.45), 0 4px 10px rgba(0, 0, 0, 0.22), inset 0 1px 1.5px rgba(255, 255, 255, 0.7)',
-              border: '1px solid rgba(255, 255, 255, 0.45)'
+              boxShadow: '0 14px 32px -4px rgba(45, 12, 12, 0.45), 0 4px 12px rgba(0, 0, 0, 0.22), inset 0 1px 2px rgba(255, 255, 255, 0.85)',
+              border: '1px solid rgba(255, 255, 255, 0.55)'
             }}
           >
             <span>See How It Works</span>
           </button>
         </div>
 
-        {/* Clinician & Staff Access Bar */}
-        <div className="mt-8 flex items-center justify-center gap-3.5 bg-white/35 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/45 text-xs text-slate-800 shadow-xs flex-wrap">
+        {/* Staff Access Bar with glossy glass */}
+        <div className="mt-8 flex items-center justify-center gap-3.5 bg-white/45 backdrop-blur-xl px-6 py-2.5 rounded-full border border-white/65 text-xs text-slate-800 shadow-[0_6px_20px_rgba(0,0,0,0.06),inset_0_1px_1px_rgba(255,255,255,0.8)] flex-wrap">
           <span className="text-[11px] font-mono uppercase tracking-wider text-[#7D0C0C] font-bold">
             Hospital Staff Portal:
           </span>
@@ -490,14 +485,14 @@ export const MediFlowHero: React.FC<MediFlowHeroProps> = ({
             onClick={() => onOpenAuth && onOpenAuth('login')}
             className="font-semibold underline decoration-[#7D0C0C]/50 hover:text-[#7D0C0C] cursor-pointer"
           >
-            Clinician Sign In
+            Staff Sign In
           </button>
           <span className="text-slate-400">·</span>
           <button 
             onClick={() => onOpenAuth && onOpenAuth('register')}
             className="font-semibold underline decoration-[#7D0C0C]/50 hover:text-[#7D0C0C] cursor-pointer"
           >
-            Register Clinician Account
+            Register Staff Account
           </button>
           <span className="text-slate-400">·</span>
           <button 
@@ -530,17 +525,20 @@ export const MediFlowHero: React.FC<MediFlowHeroProps> = ({
           How MediFlow Helps
         </h2>
 
-        {/* 4 Feature Items in a horizontal row */}
-        <div className="mt-12 sm:mt-16 w-full grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-6 lg:gap-10 items-end justify-center">
+        {/* 4 Feature Items in a horizontal row with glossy acrylic pedestals */}
+        <div className="mt-12 sm:mt-16 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-8 items-stretch justify-center">
           
           {/* ===================================================================
               Item 1: ECG Bedside Monitor Icon + View Monitoring →
               =================================================================== */}
-          <div className="flex flex-col items-center group cursor-pointer" onClick={() => onNavigate('dashboard')}>
+          <div 
+            className="p-5 sm:p-6 rounded-3xl bg-white/20 hover:bg-white/35 backdrop-blur-xl border border-white/50 border-t-white/80 shadow-[0_12px_32px_rgba(0,0,0,0.07),inset_0_1px_2px_rgba(255,255,255,0.7)] flex flex-col items-center justify-between group cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.12),inset_0_1px_2px_rgba(255,255,255,0.9)]" 
+            onClick={() => onNavigate('dashboard')}
+          >
             {/* Monitor Line Icon matching screenshot */}
             <div className="w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center transition-transform group-hover:scale-105 duration-200">
               <svg 
-                className="w-16 h-16 sm:w-20 sm:h-20"
+                className="w-16 h-16 sm:w-20 sm:h-20" 
                 viewBox="0 0 72 72" 
                 fill="none" 
                 xmlns="http://www.w3.org/2000/svg"
@@ -583,17 +581,17 @@ export const MediFlowHero: React.FC<MediFlowHeroProps> = ({
               </svg>
             </div>
 
-            {/* Dark Pewter Pill Button */}
+            {/* Dark Pewter Glossy Pill Button */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 onNavigate('dashboard');
               }}
-              className="mt-4 px-4 sm:px-5 py-2 rounded-full text-[11px] sm:text-xs font-medium text-white transition-all transform group-hover:scale-103 active:scale-98 shadow-md"
+              className="mt-4 px-4 sm:px-5 py-2 rounded-full text-[11px] sm:text-xs font-medium text-white transition-all transform group-hover:scale-103 active:scale-98 glossy-button"
               style={{
-                background: 'linear-gradient(180deg, #536259 0%, #3B4640 100%)',
-                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.35)',
-                border: '1px solid rgba(255, 255, 255, 0.12)'
+                background: 'linear-gradient(180deg, #5C6E63 0%, #435149 50%, #343E38 100%)',
+                boxShadow: '0 6px 16px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.45)',
+                border: '1px solid rgba(255, 255, 255, 0.25)'
               }}
             >
               <span>View Monitoring →</span>
@@ -603,11 +601,14 @@ export const MediFlowHero: React.FC<MediFlowHeroProps> = ({
           {/* ===================================================================
               Item 2: Medical Clipboard with 3 Checkmarks + View Patient Queue →
               =================================================================== */}
-          <div className="flex flex-col items-center group cursor-pointer" onClick={() => onNavigate('patients')}>
+          <div 
+            className="p-5 sm:p-6 rounded-3xl bg-white/20 hover:bg-white/35 backdrop-blur-xl border border-white/50 border-t-white/80 shadow-[0_12px_32px_rgba(0,0,0,0.07),inset_0_1px_2px_rgba(255,255,255,0.7)] flex flex-col items-center justify-between group cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.12),inset_0_1px_2px_rgba(255,255,255,0.9)]" 
+            onClick={() => onNavigate('patients')}
+          >
             {/* Clipboard Line Icon matching screenshot */}
             <div className="w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center transition-transform group-hover:scale-105 duration-200">
               <svg 
-                className="w-16 h-16 sm:w-20 sm:h-20"
+                className="w-16 h-16 sm:w-20 sm:h-20" 
                 viewBox="0 0 72 72" 
                 fill="none" 
                 xmlns="http://www.w3.org/2000/svg"
@@ -661,17 +662,17 @@ export const MediFlowHero: React.FC<MediFlowHeroProps> = ({
               </svg>
             </div>
 
-            {/* Dark Pewter Pill Button */}
+            {/* Dark Pewter Glossy Pill Button */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 onNavigate('patients');
               }}
-              className="mt-4 px-4 sm:px-5 py-2 rounded-full text-[11px] sm:text-xs font-medium text-white transition-all transform group-hover:scale-103 active:scale-98 shadow-md"
+              className="mt-4 px-4 sm:px-5 py-2 rounded-full text-[11px] sm:text-xs font-medium text-white transition-all transform group-hover:scale-103 active:scale-98 glossy-button"
               style={{
-                background: 'linear-gradient(180deg, #536259 0%, #3B4640 100%)',
-                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.35)',
-                border: '1px solid rgba(255, 255, 255, 0.12)'
+                background: 'linear-gradient(180deg, #5C6E63 0%, #435149 50%, #343E38 100%)',
+                boxShadow: '0 6px 16px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.45)',
+                border: '1px solid rgba(255, 255, 255, 0.25)'
               }}
             >
               <span>View Patient Queue →</span>
@@ -681,7 +682,10 @@ export const MediFlowHero: React.FC<MediFlowHeroProps> = ({
           {/* ===================================================================
               Item 3: Ascending Bar Chart with Trend Arrow + Explore Forecasts →
               =================================================================== */}
-          <div className="flex flex-col items-center group cursor-pointer" onClick={() => onNavigate('insights')}>
+          <div 
+            className="p-5 sm:p-6 rounded-3xl bg-white/20 hover:bg-white/35 backdrop-blur-xl border border-white/50 border-t-white/80 shadow-[0_12px_32px_rgba(0,0,0,0.07),inset_0_1px_2px_rgba(255,255,255,0.7)] flex flex-col items-center justify-between group cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.12),inset_0_1px_2px_rgba(255,255,255,0.9)]" 
+            onClick={() => onNavigate('insights')}
+          >
             {/* Bar Chart Line Icon matching screenshot */}
             <div className="w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center transition-transform group-hover:scale-105 duration-200">
               <svg 
@@ -720,17 +724,17 @@ export const MediFlowHero: React.FC<MediFlowHeroProps> = ({
               </svg>
             </div>
 
-            {/* Dark Pewter Pill Button */}
+            {/* Dark Pewter Glossy Pill Button */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 onNavigate('insights');
               }}
-              className="mt-4 px-4 sm:px-5 py-2 rounded-full text-[11px] sm:text-xs font-medium text-white transition-all transform group-hover:scale-103 active:scale-98 shadow-md"
+              className="mt-4 px-4 sm:px-5 py-2 rounded-full text-[11px] sm:text-xs font-medium text-white transition-all transform group-hover:scale-103 active:scale-98 glossy-button"
               style={{
-                background: 'linear-gradient(180deg, #536259 0%, #3B4640 100%)',
-                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.35)',
-                border: '1px solid rgba(255, 255, 255, 0.12)'
+                background: 'linear-gradient(180deg, #5C6E63 0%, #435149 50%, #343E38 100%)',
+                boxShadow: '0 6px 16px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.45)',
+                border: '1px solid rgba(255, 255, 255, 0.25)'
               }}
             >
               <span>Explore Forecasts →</span>
@@ -740,7 +744,10 @@ export const MediFlowHero: React.FC<MediFlowHeroProps> = ({
           {/* ===================================================================
               Item 4: Operations Screen with Gear & Nodes + View Recommendations →
               =================================================================== */}
-          <div className="flex flex-col items-center group cursor-pointer" onClick={() => onNavigate('dashboard')}>
+          <div 
+            className="p-5 sm:p-6 rounded-3xl bg-white/20 hover:bg-white/35 backdrop-blur-xl border border-white/50 border-t-white/80 shadow-[0_12px_32px_rgba(0,0,0,0.07),inset_0_1px_2px_rgba(255,255,255,0.7)] flex flex-col items-center justify-between group cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.12),inset_0_1px_2px_rgba(255,255,255,0.9)]" 
+            onClick={() => onNavigate('dashboard')}
+          >
             {/* Screen with Gear & Flow Nodes matching screenshot */}
             <div className="w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center transition-transform group-hover:scale-105 duration-200">
               <svg 
@@ -777,23 +784,22 @@ export const MediFlowHero: React.FC<MediFlowHeroProps> = ({
               </svg>
             </div>
 
-            {/* Dark Pewter Pill Button */}
+            {/* Dark Pewter Glossy Pill Button */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 onNavigate('dashboard');
               }}
-              className="mt-4 px-4 sm:px-5 py-2 rounded-full text-[11px] sm:text-xs font-medium text-white transition-all transform group-hover:scale-103 active:scale-98 shadow-md"
+              className="mt-4 px-4 sm:px-5 py-2 rounded-full text-[11px] sm:text-xs font-medium text-white transition-all transform group-hover:scale-103 active:scale-98 glossy-button"
               style={{
-                background: 'linear-gradient(180deg, #536259 0%, #3B4640 100%)',
-                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.35)',
-                border: '1px solid rgba(255, 255, 255, 0.12)'
+                background: 'linear-gradient(180deg, #5C6E63 0%, #435149 50%, #343E38 100%)',
+                boxShadow: '0 6px 16px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.45)',
+                border: '1px solid rgba(255, 255, 255, 0.25)'
               }}
             >
               <span>View Recommendations →</span>
             </button>
           </div>
-
         </div>
       </div>
     </div>

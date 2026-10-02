@@ -6,12 +6,12 @@ import { initializeFirestore, doc, getDocFromServer } from 'firebase/firestore';
 const env = ((import.meta as any).env || {}) as Record<string, string>;
 
 export const firebaseConfig = {
-  apiKey: env.VITE_FIREBASE_API_KEY || "AIzaSyDummyKeyForBuildVerificationOnly",
-  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN || "ai-studio-5eda1bf1-d2e8-45fa-806b-c9db72ef2ddc.firebaseapp.com",
-  projectId: env.VITE_FIREBASE_PROJECT_ID || "ai-studio-5eda1bf1-d2e8-45fa-806b-c9db72ef2ddc",
-  storageBucket: env.VITE_FIREBASE_STORAGE_BUCKET || "ai-studio-5eda1bf1-d2e8-45fa-806b-c9db72ef2ddc.appspot.com",
-  messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID || "100631651180",
-  appId: env.VITE_FIREBASE_APP_ID || "1:100631651180:web:5eda1bf1d2e845fa806bc9db",
+  apiKey: env.VITE_FIREBASE_API_KEY || "AIzaSyDvmvHvQweKG0MPntsXg9ScqiIJ-mQ-3Lw",
+  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN || "gen-lang-client-0970074912.firebaseapp.com",
+  projectId: env.VITE_FIREBASE_PROJECT_ID || "gen-lang-client-0970074912",
+  storageBucket: env.VITE_FIREBASE_STORAGE_BUCKET || "gen-lang-client-0970074912.firebasestorage.app",
+  messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID || "215336596837",
+  appId: env.VITE_FIREBASE_APP_ID || "1:215336596837:web:12dfbea453725730ec5d8c",
   firestoreDatabaseId: env.VITE_FIREBASE_DATABASE_ID || "ai-studio-5eda1bf1-d2e8-45fa-806b-c9db72ef2ddc"
 };
 
