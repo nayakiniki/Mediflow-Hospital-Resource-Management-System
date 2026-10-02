@@ -1,0 +1,6 @@
+{
+  "name": "MediFlow Hospital Operations",
+  "description": "Hospital operations command center featuring real-time bed management, critical patient queue triage, staffing allocation, and clinical workflow automation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

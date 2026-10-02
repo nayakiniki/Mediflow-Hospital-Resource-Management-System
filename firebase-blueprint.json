@@ -1,0 +1,45 @@
+{
+  "entities": {
+    "User": {
+      "title": "Clinician User Profile",
+      "description": "User profile information for clinician or medical reviewer.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["clinician", "physician", "auditor"] },
+        "department": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "ClinicalReport": {
+      "title": "Clinical Documentation Report",
+      "description": "Analyzed clinical documentation reports saved per clinician.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string", "maxLength": 300 },
+        "filename": { "type": "string", "maxLength": 200 },
+        "snippet": { "type": "string", "maxLength": 1000 },
+        "status": { "type": "string", "enum": ["validated", "requires_review", "flagged"] },
+        "report_summary": { "type": "string", "maxLength": 4000 },
+        "sourceType": { "type": "string", "enum": ["text", "file"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "title", "filename", "status", "report_summary"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Stores clinician user profile data."
+    },
+    "/users/{userId}/reports/{reportId}": {
+      "schema": "ClinicalReport",
+      "description": "Stores analyzed clinical documentation history belonging to the clinician."
+    }
+  }
+}

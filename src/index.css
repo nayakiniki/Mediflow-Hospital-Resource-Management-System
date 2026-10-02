@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", "Cinzel", "Playfair Display", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-mediflow-dark: #0B1710;
+  --color-mediflow-bg: #0F1E16;
+  --color-mediflow-pine: #15271D;
+  --color-mediflow-card: #183124;
+  --color-mediflow-card-hover: #1E3B2C;
+  --color-mediflow-border: #234330;
+  --color-mediflow-sage: #2C4838;
+  --color-mediflow-coral: #E88F89;
+  --color-mediflow-coral-hover: #F2A39F;
+  --color-mediflow-crimson: #C93838;
+  --color-mediflow-emerald: #10B981;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #0B1710;
+  color: #E2E8F0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0B1710;
+}
+::-webkit-scrollbar-thumb {
+  background: #234330;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #346045;
+}
+
+/* Glassmorphic and contour backgrounds */
+.mediflow-glass {
+  background: rgba(21, 39, 29, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(44, 72, 56, 0.6);
+}
+
+.mediflow-glass-subtle {
+  background: rgba(24, 49, 36, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(44, 72, 56, 0.4);
+}
+
+.mediflow-card-glow {
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5), 0 0 15px -3px rgba(16, 185, 129, 0.05);
+}
+
+.mediflow-coral-glow {
+  box-shadow: 0 4px 16px -2px rgba(232, 143, 137, 0.35);
+}
+
+.mediflow-crimson-glow {
+  box-shadow: 0 4px 16px -2px rgba(201, 56, 56, 0.35);
+}
+
+/* Topo background pattern */
+.topo-pattern {
+  background-image: radial-gradient(rgba(34, 197, 94, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
